@@ -1,0 +1,12 @@
+C:\Users\artiglio\Desktop\gra\gra\bin\Debug\gra.exe.config
+C:\Users\artiglio\Desktop\gra\gra\bin\Debug\gra.exe
+C:\Users\artiglio\Desktop\gra\gra\bin\Debug\gra.pdb
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.csprojAssemblyReference.cache
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.Form1.resources
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.Properties.Resources.resources
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.csproj.GenerateResource.cache
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.csproj.CoreCompileInputs.cache
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.exe
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.pdb
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.AboutBox1.resources
+C:\Users\artiglio\Desktop\gra\gra\obj\Debug\gra.GameNote.resources
