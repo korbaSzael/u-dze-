@@ -1,0 +1,8 @@
+C:\Users\Piotr\Desktop\dll\dll\bin\Debug\netstandard1.4\dll.deps.json
+C:\Users\Piotr\Desktop\dll\dll\bin\Debug\netstandard1.4\dll.dll
+C:\Users\Piotr\Desktop\dll\dll\bin\Debug\netstandard1.4\dll.pdb
+C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard1.4\dll.csprojAssemblyReference.cache
+C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard1.4\dll.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard1.4\dll.AssemblyInfo.cs
+C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard1.4\dll.dll
+C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard1.4\dll.pdb

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using dll;
 
 namespace gra
 {
@@ -14,7 +15,7 @@ namespace gra
         public AboutBox1()
         {
             InitializeComponent();
-            if (common.IsWindowAlreadyOpened(this.Text))
+            if (dll.dll.IsWindowAlreadyOpened(this.Text))
             {
                 Close();
             }
@@ -133,6 +134,11 @@ namespace gra
         }
 
         private void tableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void labelVersion_Click(object sender, EventArgs e)
         {
 
         }

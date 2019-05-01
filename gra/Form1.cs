@@ -15,6 +15,8 @@ using System.Net;
 using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Diagnostics;
+using dll;
 
 namespace gra{
     public partial class Form1 : Form
@@ -41,10 +43,10 @@ namespace gra{
         }
         public void DrawBegin() {
             Bitmap frog1 = new Bitmap(common.gamePath + "żaba1.jpg");
-            Bitmap brick1 = new Bitmap(common.gamePath + "cegła1.jpg");
+            Bitmap leaf = new Bitmap(common.gamePath + "liść.jpg");
             Point center = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
             DrawBMP(frog1, new Point((center.X - frog1.Width / 2), (center.Y - frog1.Height)));
-            DrawBMP(brick1, new Point((center.X - brick1.Width / 2), center.Y));
+            DrawBMP(leaf, new Point((center.X - leaf.Width / 2), center.Y));
         }
         public void DrawSky(string fName) {
             Bitmap sky = new Bitmap(fName);
@@ -61,10 +63,11 @@ namespace gra{
         }
         public Form1()
         {
+            if (common.isAlreadyOpened()) System.Environment.Exit(0);
             InitializeComponent();
             common.gamePath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\') - 1) - 1) + 1);
             pictureBox1.Image = gameView = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            bgImgPath = common.gamePath + "świt.jpg";
+            bgImgPath = common.gamePath + "staw.jpg";
             DrawSky(bgImgPath);
             DrawBegin();
         }
@@ -81,7 +84,7 @@ namespace gra{
 
         private void zakonczToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            System.Environment.Exit(0);
         }
 
         private void wstzrymajToolStripMenuItem_Click(object sender, EventArgs e)
@@ -122,7 +125,7 @@ namespace gra{
 
         private void przemyśleniaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "Wyświetlono zapiski o grze...";
+            toolStripStatusLabel1.Text = "Wyświetlono zapisy o grze...";
             GameNote gameNote = new GameNote();
             gameNote.Show();
         }
@@ -136,7 +139,7 @@ namespace gra{
         private void button2_Click(object sender, EventArgs e)
         {
             common.DesktopBMP(common.gamePath + "desktopShot.bmp");
-            toolStripStatusLabel1.Text = "Zapisano zrzut ekranu w pliku desktopShot.bmp...";
+            toolStripStatusLabel1.Text = "Zapisano zrzut ekranu w bieżącej teczce w pliku desktopShot.bmp...";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -191,6 +194,7 @@ namespace gra{
 
         private void nowaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
         }
 
         private void button1_MouseEnter(object sender, EventArgs e)
@@ -212,14 +216,122 @@ namespace gra{
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem zmienisz tło planszy...";
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bibliotekiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Wyświetlono załadowane biblioteki...";
+            Biblioteki biblioteki = new Biblioteki();
+            biblioteki.Show();
+        }
+
+        private void przemyśleniaToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu redagujesz swoje myśli...";
+        }
+
+        private void bibliotekiToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu wejrzysz w załadowane biblioteki...";
+        }
+
+        private void oGrzeToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu dowiesz się więcej o grze...";
+        }
+
+        private void barwyToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zmienisz barwę menu...";
+        }
+
+        private void inneToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zmienisz tą czcionkę...";
+        }
+
+        private void wyświetlToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zajrzysz w pomoc...";
+        }
+
+        private void zakonczToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zakończysz grę...";
+        }
+
+        private void wczytajToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void zapiszToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void nowaToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu rozpoczniesz wtórną rozgrywkę...";
+        }
+
+        private void zapiszToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zachowasz rozgrywkę...";
+        }
+
+        private void wczytajToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu wczytasz rozgrywkę...";
+        }
+
+        private void pomocToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Wciśnij by uzyskać pomoc...";
+        }
+
+        private void ustawieniaToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Wciśnij by nastroić swojstwa...";
+        }
+
+        private void graToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Wciśnij by przełączyć grę...";
+        }
+
+        private void toolStripSplitButton1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Czekaj lub puść dążenia...";
+        }
+
+        private void odtwarzajToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Chcesz dalej się zabawiać...";
+        }
+
+        private void wstzrymajToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Chcesz przerwać zabawę...";
+        }
+
+        private void zrzutyToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zrobisz inny zrzut wciskając dwa razy w wybrane potem okno...";
+        }
+
+        private void zrzutyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Proszę robić sobie inny zrzut wciskając podwójnie wybrane okno...";
+            zrzuty zrzutyOkno = new zrzuty();
+            zrzutyOkno.Show();
+        }
     }
-    public class window
-    {
-        public IntPtr handle;
-        public String name;
-        public String className;
-        public List<window> childWindows = null;
-    }
+
     public class common
     {
         public static string gamePath = "";
@@ -227,66 +339,6 @@ namespace gra{
         {
             string[] filePaths = Directory.GetFiles(rootPath, fileName, SearchOption.AllDirectories);
             return filePaths;
-        }
-        private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetWindowText(IntPtr hWnd, StringBuilder strText, int maxCount);
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        private static extern int GetWindowTextLength(IntPtr hWnd);
-        [DllImport("user32.dll")]
-        private static extern bool EnumWindows(EnumWindowsProc enumProc, IntPtr lParam);
-        [DllImport("user32.dll")]
-        private static extern bool IsWindowVisible(IntPtr hWnd);
-        [DllImport("user32.dll")]
-        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool EnumChildWindows(IntPtr hwndParent, EnumWindowsProc lpEnumFunc, IntPtr lParam);
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern IntPtr GetWindow(IntPtr hWnd, uint uCmd);
-        [DllImport("User32.Dll")]
-        private static extern void GetClassName(int hWnd, StringBuilder s, int nMaxCount);
-        private static string _GetClassName(IntPtr hWnd)
-        {
-            StringBuilder sbClass = new StringBuilder(256);
-            GetClassName((int)hWnd, sbClass, sbClass.Capacity);
-            return sbClass.ToString();
-        }
-        private static bool EnumTheWindows(IntPtr hWnd, IntPtr listHandle)
-        {
-            List<window> windows = GCHandle.FromIntPtr(listHandle).Target as List<window>;
-            int size = GetWindowTextLength(hWnd);
-            if (size++ > 0 && IsWindowVisible(hWnd))
-            {
-                StringBuilder sb = new StringBuilder(size);
-                GetWindowText(hWnd, sb, size);
-                window Window = new window { handle = hWnd, name = sb.ToString(), className = _GetClassName(hWnd) };
-                windows.Add(Window);
-                IntPtr childWindow = GetWindow(hWnd, 5);//GW_CHILD = 5
-                if (childWindow != null && IsWindowVisible(childWindow))
-                {
-                    Window.childWindows = new List<window>();
-                    EnumChildWindows(hWnd, EnumTheWindows, GCHandle.ToIntPtr(GCHandle.Alloc(Window.childWindows)));
-                };
-            }
-            return true;
-        }
-        public static List<window> allWindows()
-        {
-            List<window> windows = new List<window>();
-            EnumWindows(EnumTheWindows, GCHandle.ToIntPtr(GCHandle.Alloc(windows)));
-            return windows;
-        }
-        public static string windowsToString(List<window> windows, int progress)
-        {
-            string allWindows = "";
-            foreach (window Window in windows)
-            {
-                for (int i = 0; i < progress; i++) allWindows += "  ";
-                allWindows += Window.name + "     " + Window.className + "\n";
-                if (Window.childWindows != null) allWindows += windowsToString(Window.childWindows, progress + 1);
-            }
-            return allWindows;
         }
         [DllImport("User32.dll")]
         private static extern IntPtr GetDC(IntPtr hwnd);
@@ -317,37 +369,29 @@ namespace gra{
         {
             WNDtoBMP(GetDesktopWindow(), fName);
         }
-        public static void destroyAllWindows(List<window> windows)
-        {
-            foreach (window Window in windows)
-            {
-                if (Window.childWindows != null)
-                {
-                    destroyAllWindows(Window.childWindows);
-                };
-            }
-            windows.Clear();
-        }
-        public static bool IsWindowAlreadyOpened(string wName)
-        {
-            bool answer = false;
-            List<window> windows = common.allWindows();
-            foreach (window Window in windows)
-            {
-                if (Window.name == wName) {
-                    answer = true;
-                    break;
-                };
-            }
-            destroyAllWindows(windows);
-            return answer;
-        }
         public static string getWebPage(string from)
         {
             var request = (HttpWebRequest)WebRequest.Create(from);
             var response = (HttpWebResponse)request.GetResponse();
             var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
             return responseString;
+        }
+        public static bool isAlreadyOpened()
+        {
+            Process[] processTable = Process.GetProcesses();
+            Process current = Process.GetCurrentProcess();
+            bool alreadyOpened = false;
+            foreach (Process pr in processTable)
+            {
+                try
+                {
+                    if (pr.MainModule.FileName == current.MainModule.FileName && pr.Id != current.Id) alreadyOpened = true;
+                }
+                catch (Exception ex)
+                {
+                }
+            }
+            return alreadyOpened;
         }
     }
 }

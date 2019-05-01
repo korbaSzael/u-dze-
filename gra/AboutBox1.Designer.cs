@@ -102,6 +102,7 @@
             this.labelVersion.TabIndex = 0;
             this.labelVersion.Text = "Wersja : beta 1.0";
             this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelVersion.Click += new System.EventHandler(this.labelVersion_Click);
             // 
             // labelCopyright
             // 
@@ -139,7 +140,8 @@
             this.textBoxDescription.Size = new System.Drawing.Size(271, 126);
             this.textBoxDescription.TabIndex = 23;
             this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
+            this.textBoxDescription.Text = "Opis : Gra zręcznościowa żabka powstała dla rozrywki dla dzieci oraz jest rozpows" +
+    "zechniana ogólnie w społeczeństwie.";
             this.textBoxDescription.TextChanged += new System.EventHandler(this.textBoxDescription_TextChanged);
             // 
             // okButton
@@ -161,11 +163,11 @@
             this.ClientSize = new System.Drawing.Size(435, 283);
             this.Controls.Add(this.tableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutBox1";
             this.Padding = new System.Windows.Forms.Padding(9);
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AboutBox11";
