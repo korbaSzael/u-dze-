@@ -35,6 +35,10 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // treeView1
@@ -42,7 +46,7 @@
             this.treeView1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.treeView1.Location = new System.Drawing.Point(12, 37);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(571, 364);
+            this.treeView1.Size = new System.Drawing.Size(571, 350);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
@@ -74,6 +78,7 @@
             this.textBox3.Size = new System.Drawing.Size(184, 20);
             this.textBox3.TabIndex = 3;
             this.textBox3.Text = "windowShot.bmp";
+            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
             // 
             // label1
             // 
@@ -93,11 +98,44 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Wciśnij dwa razy na swój wybór poniżej";
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(12, 393);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(571, 20);
+            this.textBox4.TabIndex = 6;
+            this.textBox4.TabStop = false;
+            this.textBox4.Text = "klasa okna";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(589, 392);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(204, 20);
+            this.textBox5.TabIndex = 7;
+            this.textBox5.TabStop = false;
+            this.textBox5.Text = "uchwyt okna";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(602, 74);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(182, 27);
+            this.button1.TabIndex = 8;
+            this.button1.Text = "zmień folder zapisu";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // zrzuty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox3);
@@ -121,5 +159,9 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button button1;
     }
 }

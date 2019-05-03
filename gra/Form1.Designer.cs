@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.HelpProvider helpProvider1;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.graToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,40 +41,52 @@
             this.przemyśleniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barwyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zarządcaZdjęćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wyświetlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oGrzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bibliotekiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zrzutyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
-            this.odtwarzajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wstzrymajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.sterownikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.taakToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nieeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.odtwarzajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wstzrymajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minimalizujToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
+            helpProvider1.SetHelpString(this.menuStrip1, "");
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.graToolStripMenuItem,
             this.ustawieniaToolStripMenuItem,
             this.pomocToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            helpProvider1.SetShowHelp(this.menuStrip1, false);
             this.menuStrip1.Size = new System.Drawing.Size(873, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -127,7 +141,8 @@
             this.ustawieniaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.przemyśleniaToolStripMenuItem,
             this.barwyToolStripMenuItem,
-            this.inneToolStripMenuItem});
+            this.inneToolStripMenuItem,
+            this.zarządcaZdjęćToolStripMenuItem});
             this.ustawieniaToolStripMenuItem.Name = "ustawieniaToolStripMenuItem";
             this.ustawieniaToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
             this.ustawieniaToolStripMenuItem.Text = "Ustawienia";
@@ -158,13 +173,22 @@
             this.inneToolStripMenuItem.Click += new System.EventHandler(this.inneToolStripMenuItem_Click);
             this.inneToolStripMenuItem.MouseEnter += new System.EventHandler(this.inneToolStripMenuItem_MouseEnter);
             // 
+            // zarządcaZdjęćToolStripMenuItem
+            // 
+            this.zarządcaZdjęćToolStripMenuItem.Name = "zarządcaZdjęćToolStripMenuItem";
+            this.zarządcaZdjęćToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.zarządcaZdjęćToolStripMenuItem.Text = "Zarządca zdjęć";
+            this.zarządcaZdjęćToolStripMenuItem.Click += new System.EventHandler(this.zarządcaZdjęćToolStripMenuItem_Click);
+            this.zarządcaZdjęćToolStripMenuItem.MouseHover += new System.EventHandler(this.zarządcaZdjęćToolStripMenuItem_MouseHover);
+            // 
             // pomocToolStripMenuItem
             // 
             this.pomocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.wyświetlToolStripMenuItem,
             this.oGrzeToolStripMenuItem,
             this.bibliotekiToolStripMenuItem,
-            this.zrzutyToolStripMenuItem});
+            this.zrzutyToolStripMenuItem,
+            this.sterownikiToolStripMenuItem});
             this.pomocToolStripMenuItem.Name = "pomocToolStripMenuItem";
             this.pomocToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
             this.pomocToolStripMenuItem.Text = "Pomoc";
@@ -173,7 +197,7 @@
             // wyświetlToolStripMenuItem
             // 
             this.wyświetlToolStripMenuItem.Name = "wyświetlToolStripMenuItem";
-            this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.wyświetlToolStripMenuItem.Text = "Wyświetl";
             this.wyświetlToolStripMenuItem.Click += new System.EventHandler(this.wyświetlToolStripMenuItem_Click);
             this.wyświetlToolStripMenuItem.MouseEnter += new System.EventHandler(this.wyświetlToolStripMenuItem_MouseEnter);
@@ -181,7 +205,7 @@
             // oGrzeToolStripMenuItem
             // 
             this.oGrzeToolStripMenuItem.Name = "oGrzeToolStripMenuItem";
-            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.oGrzeToolStripMenuItem.Text = "O grze";
             this.oGrzeToolStripMenuItem.Click += new System.EventHandler(this.oGrzeToolStripMenuItem_Click);
             this.oGrzeToolStripMenuItem.MouseEnter += new System.EventHandler(this.oGrzeToolStripMenuItem_MouseEnter);
@@ -189,7 +213,7 @@
             // bibliotekiToolStripMenuItem
             // 
             this.bibliotekiToolStripMenuItem.Name = "bibliotekiToolStripMenuItem";
-            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.bibliotekiToolStripMenuItem.Text = "Biblioteki";
             this.bibliotekiToolStripMenuItem.Click += new System.EventHandler(this.bibliotekiToolStripMenuItem_Click);
             this.bibliotekiToolStripMenuItem.MouseEnter += new System.EventHandler(this.bibliotekiToolStripMenuItem_MouseEnter);
@@ -197,10 +221,126 @@
             // zrzutyToolStripMenuItem
             // 
             this.zrzutyToolStripMenuItem.Name = "zrzutyToolStripMenuItem";
-            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.zrzutyToolStripMenuItem.Text = "Zrzuty";
             this.zrzutyToolStripMenuItem.Click += new System.EventHandler(this.zrzutyToolStripMenuItem_Click);
             this.zrzutyToolStripMenuItem.MouseHover += new System.EventHandler(this.zrzutyToolStripMenuItem_MouseHover);
+            // 
+            // sterownikiToolStripMenuItem
+            // 
+            this.sterownikiToolStripMenuItem.Name = "sterownikiToolStripMenuItem";
+            this.sterownikiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sterownikiToolStripMenuItem.Text = "Sterowniki";
+            this.sterownikiToolStripMenuItem.Click += new System.EventHandler(this.sterownikiToolStripMenuItem_Click);
+            this.sterownikiToolStripMenuItem.MouseHover += new System.EventHandler(this.sterownikiToolStripMenuItem_MouseHover);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            helpProvider1.SetHelpString(this.pictureBox1, "Tutaj wykonuje się gra...");
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            helpProvider1.SetShowHelp(this.pictureBox1, true);
+            this.pictureBox1.Size = new System.Drawing.Size(555, 398);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.pictureBox1.MouseHover += new System.EventHandler(this.pictureBox1_MouseHover);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.taakToolStripMenuItem,
+            this.nieeToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(126, 48);
+            // 
+            // taakToolStripMenuItem
+            // 
+            this.taakToolStripMenuItem.Name = "taakToolStripMenuItem";
+            this.taakToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.taakToolStripMenuItem.Text = "Zachowaj";
+            this.taakToolStripMenuItem.Click += new System.EventHandler(this.taakToolStripMenuItem_Click);
+            // 
+            // nieeToolStripMenuItem
+            // 
+            this.nieeToolStripMenuItem.Name = "nieeToolStripMenuItem";
+            this.nieeToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.nieeToolStripMenuItem.Text = "Odtwórz";
+            this.nieeToolStripMenuItem.Click += new System.EventHandler(this.nieeToolStripMenuItem_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Controls.Add(this.button1);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.button3);
+            this.flowLayoutPanel1.Controls.Add(this.button4);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            helpProvider1.SetHelpString(this.flowLayoutPanel1, "");
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(564, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            helpProvider1.SetShowHelp(this.flowLayoutPanel1, true);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(306, 398);
+            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.MouseHover += new System.EventHandler(this.flowLayoutPanel1_MouseHover);
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.NoMove2D;
+            helpProvider1.SetHelpString(this.button1, "Zrób zrzut okna gry...");
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Name = "button1";
+            helpProvider1.SetShowHelp(this.button1, true);
+            this.button1.Size = new System.Drawing.Size(106, 98);
+            this.button1.TabIndex = 0;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
+            // 
+            // button2
+            // 
+            this.button2.Cursor = System.Windows.Forms.Cursors.PanSE;
+            helpProvider1.SetHelpString(this.button2, "Zrób zrzut ekranu...");
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.Location = new System.Drawing.Point(115, 3);
+            this.button2.Name = "button2";
+            helpProvider1.SetShowHelp(this.button2, true);
+            this.button2.Size = new System.Drawing.Size(154, 126);
+            this.button2.TabIndex = 1;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.MouseEnter += new System.EventHandler(this.button2_MouseEnter);
+            // 
+            // button3
+            // 
+            this.button3.Cursor = System.Windows.Forms.Cursors.Cross;
+            helpProvider1.SetHelpString(this.button3, "Pobierz czas z serwera...");
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(3, 135);
+            this.button3.Name = "button3";
+            helpProvider1.SetShowHelp(this.button3, true);
+            this.button3.Size = new System.Drawing.Size(106, 117);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
+            // 
+            // button4
+            // 
+            this.button4.Cursor = System.Windows.Forms.Cursors.PanNE;
+            helpProvider1.SetHelpString(this.button4, "Zmień tło gry...");
+            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
+            this.button4.Location = new System.Drawing.Point(115, 135);
+            this.button4.Name = "button4";
+            helpProvider1.SetShowHelp(this.button4, true);
+            this.button4.Size = new System.Drawing.Size(108, 93);
+            this.button4.TabIndex = 3;
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.MouseEnter += new System.EventHandler(this.button4_MouseEnter);
             // 
             // statusStrip1
             // 
@@ -222,7 +362,8 @@
             this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.odtwarzajToolStripMenuItem,
-            this.wstzrymajToolStripMenuItem});
+            this.wstzrymajToolStripMenuItem,
+            this.minimalizujToolStripMenuItem});
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -233,17 +374,25 @@
             // odtwarzajToolStripMenuItem
             // 
             this.odtwarzajToolStripMenuItem.Name = "odtwarzajToolStripMenuItem";
-            this.odtwarzajToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.odtwarzajToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.odtwarzajToolStripMenuItem.Text = "Odtwarzaj";
             this.odtwarzajToolStripMenuItem.MouseHover += new System.EventHandler(this.odtwarzajToolStripMenuItem_MouseHover);
             // 
             // wstzrymajToolStripMenuItem
             // 
             this.wstzrymajToolStripMenuItem.Name = "wstzrymajToolStripMenuItem";
-            this.wstzrymajToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.wstzrymajToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.wstzrymajToolStripMenuItem.Text = "Wstrzymaj";
             this.wstzrymajToolStripMenuItem.Click += new System.EventHandler(this.wstzrymajToolStripMenuItem_Click);
             this.wstzrymajToolStripMenuItem.MouseHover += new System.EventHandler(this.wstzrymajToolStripMenuItem_MouseHover);
+            // 
+            // minimalizujToolStripMenuItem
+            // 
+            this.minimalizujToolStripMenuItem.Name = "minimalizujToolStripMenuItem";
+            this.minimalizujToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.minimalizujToolStripMenuItem.Text = "Minimalizuj";
+            this.minimalizujToolStripMenuItem.Click += new System.EventHandler(this.minimalizujToolStripMenuItem_Click);
+            this.minimalizujToolStripMenuItem.MouseHover += new System.EventHandler(this.minimalizujToolStripMenuItem_MouseHover);
             // 
             // toolStripProgressBar1
             // 
@@ -255,12 +404,14 @@
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             this.toolStripProgressBar1.Step = 1;
             this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.toolStripProgressBar1.MouseHover += new System.EventHandler(this.toolStripProgressBar1_MouseHover);
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
             this.toolStripStatusLabel1.Text = "Zaczynamy zabawę...";
+            this.toolStripStatusLabel1.MouseHover += new System.EventHandler(this.toolStripStatusLabel1_MouseHover);
             // 
             // tableLayoutPanel1
             // 
@@ -283,76 +434,20 @@
             this.tableLayoutPanel1.TabIndex = 2;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
-            // pictureBox1
+            // notifyIcon1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(555, 398);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            this.notifyIcon1.BalloonTipText = "wciśnij raz aby zakończyć";
+            this.notifyIcon1.BalloonTipTitle = "gra zręcznościowa żabka";
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
-            // flowLayoutPanel1
+            // toolTip1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
-            this.flowLayoutPanel1.Controls.Add(this.button3);
-            this.flowLayoutPanel1.Controls.Add(this.button4);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(564, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(306, 398);
-            this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.NoMove2D;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(3, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(106, 98);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.MouseEnter += new System.EventHandler(this.button1_MouseEnter);
-            // 
-            // button2
-            // 
-            this.button2.Cursor = System.Windows.Forms.Cursors.PanSE;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.Location = new System.Drawing.Point(115, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(154, 126);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            this.button2.MouseEnter += new System.EventHandler(this.button2_MouseEnter);
-            // 
-            // button3
-            // 
-            this.button3.Cursor = System.Windows.Forms.Cursors.Cross;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(3, 135);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(106, 117);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            this.button3.MouseEnter += new System.EventHandler(this.button3_MouseEnter);
-            // 
-            // button4
-            // 
-            this.button4.Cursor = System.Windows.Forms.Cursors.PanNE;
-            this.button4.Image = ((System.Drawing.Image)(resources.GetObject("button4.Image")));
-            this.button4.Location = new System.Drawing.Point(115, 135);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(108, 93);
-            this.button4.TabIndex = 3;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            this.button4.MouseEnter += new System.EventHandler(this.button4_MouseEnter);
+            this.toolTip1.AutoPopDelay = 5000;
+            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.IsBalloon = true;
+            this.toolTip1.ReshowDelay = 100;
             // 
             // Form1
             // 
@@ -362,18 +457,26 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.HelpButton = true;
+            helpProvider1.SetHelpKeyword(this, "");
+            helpProvider1.SetHelpString(this, "");
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
+            helpProvider1.SetShowHelp(this, false);
             this.Text = "Gra zręcznościowa żabka";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIconMenuItem1_Click);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -409,6 +512,14 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ToolStripMenuItem bibliotekiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zrzutyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sterownikiToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem taakToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem nieeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem minimalizujToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem zarządcaZdjęćToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

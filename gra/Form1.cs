@@ -200,26 +200,39 @@ namespace gra{
         private void button1_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem możesz wykonać zdjęcie widoku gry...";
+            toolTip1.SetToolTip(button1, File.Exists(common.gamePath + "windowShot.bmp")?"Nadpiszesz plik "+ common.gamePath+"windowShot.bmp": "Wciśnij aby wykonać nowy plik windowShot.bmp w "+ common.gamePath.Remove(common.gamePath.ToString().LastIndexOf("\\"), 1));
         }
 
         private void button2_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem możesz wykonać zdjęcie całego ekranu...";
+            toolTip1.SetToolTip(button2, File.Exists(common.gamePath + "desktopShot.bmp") ? "Nadpiszesz plik " + common.gamePath + "desktopShot.bmp" : "Wciśnij aby wykonać nowy plik desktopShot.bmp w " + common.gamePath.Remove(common.gamePath.ToString().LastIndexOf("\\"), 1));
         }
 
         private void button3_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem pobierzesz obecny czas...";
+            toolTip1.SetToolTip(button3, "Będzie pobranie czasu ze strony https://www.timeanddate.com/worldclock/poland");
         }
 
         private void button4_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem zmienisz tło planszy...";
+            toolTip1.SetToolTip(button4, "Zmienisz tło z obecnego "+ bgImgPath);
         }
-
+        private void notifyIconMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Environment.Exit(0);
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            ContextMenu contextMenu1 = new ContextMenu();
+            notifyIcon1.ContextMenu = contextMenu1;
+            MenuItem menuItem1 = new MenuItem();
+            menuItem1.Text = "W&yjdź";
+            menuItem1.Click += new System.EventHandler(notifyIconMenuItem1_Click);
+            contextMenu1.MenuItems.AddRange(new MenuItem[] { menuItem1 });
+            notifyIcon1.ShowBalloonTip(1000);
         }
 
         private void bibliotekiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -329,6 +342,73 @@ namespace gra{
             toolStripStatusLabel1.Text = "Proszę robić sobie inny zrzut wciskając podwójnie wybrane okno...";
             zrzuty zrzutyOkno = new zrzuty();
             zrzutyOkno.Show();
+        }
+
+        private void sterownikiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Wyświetlono dostępne sterowniki...";
+            sterowniki sterownikiOkno = new sterowniki();
+            sterownikiOkno.Show();
+        }
+
+        private void sterownikiToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu podjerzysz obecne sterowniki...";
+        }
+
+        private void notifyIcon1_MouseClick(object sender, MouseEventArgs e)
+        {
+                System.Environment.Exit(0);
+        }
+
+        private void nieeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Clipboard.ContainsImage()) { pictureBox1.Image = Clipboard.GetImage(); }
+        }
+        private void taakToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetImage(gameView);
+        }
+
+        private void minimalizujToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WindowState = FormWindowState.Minimized;
+        }
+
+        private void zarządcaZdjęćToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            zarzadca zarzadcaOkno = new zarzadca();
+            zarzadcaOkno.Show();
+        }
+
+        private void minimalizujToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Zmniejsz okno na pasek zadań...";
+        }
+
+        private void toolStripProgressBar1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tak daleko zaszła gra...";
+        }
+
+        private void toolStripStatusLabel1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu dostajesz powiadomienia...";
+        }
+
+        private void pictureBox1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Życzymy udanej i przyjemnej zabawy...";
+        }
+
+        private void flowLayoutPanel1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "W tej częsci są zgromadzone szybkie wywołania...";
+        }
+
+        private void zarządcaZdjęćToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Zachowaj prawym przyciskiem myszy zdjęcie z obszaru gry by tu je zachować...";
         }
     }
 

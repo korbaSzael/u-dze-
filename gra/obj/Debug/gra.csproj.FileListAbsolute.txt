@@ -26,3 +26,5 @@ C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.csproj.CopyComplete
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\dll.dll
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.Biblioteki.resources
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.zrzuty.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.sterowniki.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.zarzadca.resources

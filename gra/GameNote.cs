@@ -53,6 +53,14 @@ namespace gra
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            if (textBox1.Text == "")
+            {
+                errorProvider1.SetError(textBox1, "Łatwiej będzie filtrować z zawartością tego pola");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
             FillListBox();
         }
 

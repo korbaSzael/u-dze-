@@ -32,6 +32,7 @@ namespace gra
             
             return ltn;
         }
+        string choosenFolder = common.gamePath.Remove(common.gamePath.ToString().LastIndexOf("\\"), 1);
         private void zrzuty_Load(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
@@ -46,8 +47,24 @@ namespace gra
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            common.WNDtoBMP((treeView1.SelectedNode.Tag as window).handle, common.gamePath + textBox3.Text);
-            Process.Start(common.gamePath + textBox3.Text);
+            common.WNDtoBMP((treeView1.SelectedNode.Tag as window).handle, choosenFolder +"\\"+ textBox3.Text);
+            Process.Start(choosenFolder+"\\" + textBox3.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            folderBrowserDialog1.Description="Wybierz folder w jaki będziesz zapisywać zrzuty...";
+            folderBrowserDialog1.SelectedPath = choosenFolder;
+            DialogResult result = folderBrowserDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                choosenFolder=folderBrowserDialog1.SelectedPath;
+            }
+        }
+        private void textBox3_Click(object sender, EventArgs e)
+        {
+            textBox3.SelectionStart = 0;
+            textBox3.SelectionLength = textBox3.Text.Length-4;
         }
     }
 }
