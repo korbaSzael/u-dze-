@@ -28,3 +28,11 @@ C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.Biblioteki.resources
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.zrzuty.resources
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.sterowniki.resources
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.zarzadca.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\Interop.WMPLib.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.csproj.ResolveComReference.cache
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\Interop.WMPLib.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\AxInterop.WMPLib.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\AxInterop.WMPLib.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.Intro.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.SendMail.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.OtherPlayer.resources

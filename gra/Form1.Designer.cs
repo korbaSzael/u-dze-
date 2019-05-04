@@ -42,6 +42,9 @@
             this.barwyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.inneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zarządcaZdjęćToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.inneToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.introToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wyślijMailemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wyświetlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oGrzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +70,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.innyGraczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -83,6 +87,7 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.graToolStripMenuItem,
             this.ustawieniaToolStripMenuItem,
+            this.inneToolStripMenuItem1,
             this.pomocToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -97,7 +102,8 @@
             this.nowaToolStripMenuItem,
             this.zapiszToolStripMenuItem,
             this.wczytajToolStripMenuItem,
-            this.zakonczToolStripMenuItem});
+            this.zakonczToolStripMenuItem,
+            this.innyGraczToolStripMenuItem});
             this.graToolStripMenuItem.Name = "graToolStripMenuItem";
             this.graToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.graToolStripMenuItem.Text = "Gra";
@@ -107,7 +113,7 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             this.nowaToolStripMenuItem.MouseHover += new System.EventHandler(this.nowaToolStripMenuItem_MouseHover);
@@ -115,7 +121,7 @@
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             this.zapiszToolStripMenuItem.MouseHover += new System.EventHandler(this.zapiszToolStripMenuItem_MouseHover);
@@ -123,7 +129,7 @@
             // wczytajToolStripMenuItem
             // 
             this.wczytajToolStripMenuItem.Name = "wczytajToolStripMenuItem";
-            this.wczytajToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.wczytajToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wczytajToolStripMenuItem.Text = "Wczytaj";
             this.wczytajToolStripMenuItem.Click += new System.EventHandler(this.wczytajToolStripMenuItem_Click);
             this.wczytajToolStripMenuItem.MouseEnter += new System.EventHandler(this.wczytajToolStripMenuItem_MouseEnter);
@@ -131,7 +137,7 @@
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(118, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zakonczToolStripMenuItem.Text = "Zakończ";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             this.zakonczToolStripMenuItem.MouseEnter += new System.EventHandler(this.zakonczToolStripMenuItem_MouseEnter);
@@ -180,6 +186,31 @@
             this.zarządcaZdjęćToolStripMenuItem.Text = "Zarządca zdjęć";
             this.zarządcaZdjęćToolStripMenuItem.Click += new System.EventHandler(this.zarządcaZdjęćToolStripMenuItem_Click);
             this.zarządcaZdjęćToolStripMenuItem.MouseHover += new System.EventHandler(this.zarządcaZdjęćToolStripMenuItem_MouseHover);
+            // 
+            // inneToolStripMenuItem1
+            // 
+            this.inneToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.introToolStripMenuItem,
+            this.wyślijMailemToolStripMenuItem});
+            this.inneToolStripMenuItem1.Name = "inneToolStripMenuItem1";
+            this.inneToolStripMenuItem1.Size = new System.Drawing.Size(42, 20);
+            this.inneToolStripMenuItem1.Text = "Inne";
+            this.inneToolStripMenuItem1.MouseHover += new System.EventHandler(this.inneToolStripMenuItem1_MouseHover);
+            // 
+            // introToolStripMenuItem
+            // 
+            this.introToolStripMenuItem.Name = "introToolStripMenuItem";
+            this.introToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.introToolStripMenuItem.Text = "Intro";
+            this.introToolStripMenuItem.Click += new System.EventHandler(this.introToolStripMenuItem_Click);
+            this.introToolStripMenuItem.MouseHover += new System.EventHandler(this.introToolStripMenuItem_MouseHover);
+            // 
+            // wyślijMailemToolStripMenuItem
+            // 
+            this.wyślijMailemToolStripMenuItem.Name = "wyślijMailemToolStripMenuItem";
+            this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.wyślijMailemToolStripMenuItem.Text = "Wyślij mailem";
+            this.wyślijMailemToolStripMenuItem.Click += new System.EventHandler(this.wyślijMailemToolStripMenuItem_Click);
             // 
             // pomocToolStripMenuItem
             // 
@@ -376,6 +407,7 @@
             this.odtwarzajToolStripMenuItem.Name = "odtwarzajToolStripMenuItem";
             this.odtwarzajToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.odtwarzajToolStripMenuItem.Text = "Odtwarzaj";
+            this.odtwarzajToolStripMenuItem.Click += new System.EventHandler(this.odtwarzajToolStripMenuItem_Click);
             this.odtwarzajToolStripMenuItem.MouseHover += new System.EventHandler(this.odtwarzajToolStripMenuItem_MouseHover);
             // 
             // wstzrymajToolStripMenuItem
@@ -449,6 +481,13 @@
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ReshowDelay = 100;
             // 
+            // innyGraczToolStripMenuItem
+            // 
+            this.innyGraczToolStripMenuItem.Name = "innyGraczToolStripMenuItem";
+            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.innyGraczToolStripMenuItem.Text = "Inny gracz";
+            this.innyGraczToolStripMenuItem.Click += new System.EventHandler(this.innyGraczToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -520,6 +559,10 @@
         private System.Windows.Forms.ToolStripMenuItem minimalizujToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zarządcaZdjęćToolStripMenuItem;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolStripMenuItem inneToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem introToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wyślijMailemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem innyGraczToolStripMenuItem;
     }
 }
 

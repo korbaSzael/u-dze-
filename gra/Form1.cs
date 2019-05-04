@@ -61,6 +61,7 @@ namespace gra{
                 tmp.Y += sky.Height;
             }
         }
+        WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
         public Form1()
         {
             if (common.isAlreadyOpened()) System.Environment.Exit(0);
@@ -89,7 +90,7 @@ namespace gra{
 
         private void wstzrymajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            player.controls.stop();
         }
 
         private void oGrzeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -409,6 +410,40 @@ namespace gra{
         private void zarządcaZdjęćToolStripMenuItem_MouseHover(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Zachowaj prawym przyciskiem myszy zdjęcie z obszaru gry by tu je zachować...";
+        }
+
+        private void odtwarzajToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            player.URL = common.gamePath + "hudba.mp3";
+            player.controls.play();
+        }
+
+        private void inneToolStripMenuItem1_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Rozmieszczono inne rzeczy...";
+        }
+
+        private void introToolStripMenuItem_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Obejerzyj film Intro...";
+        }
+
+        private void introToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Intro intro = new Intro();
+            intro.Show();
+        }
+
+        private void wyślijMailemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SendMail sendMail = new SendMail();
+            sendMail.Show();
+        }
+
+        private void innyGraczToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OtherPlayer otherPlayer = new OtherPlayer();
+            otherPlayer.Show();
         }
     }
 
