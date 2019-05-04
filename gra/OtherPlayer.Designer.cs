@@ -35,6 +35,11 @@
             this.tbDATA = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.rtbFIND = new System.Windows.Forms.RichTextBox();
+            this.tbFIND = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -97,13 +102,66 @@
             this.textBox2.TabStop = false;
             this.textBox2.Text = "Rozszyfrowany";
             // 
+            // rtbFIND
+            // 
+            this.rtbFIND.Location = new System.Drawing.Point(159, 318);
+            this.rtbFIND.Name = "rtbFIND";
+            this.rtbFIND.Size = new System.Drawing.Size(183, 128);
+            this.rtbFIND.TabIndex = 6;
+            this.rtbFIND.Text = "ashjdbaskjqqs;ldjjsakdqqklhqq\njksamdkljdsaqqalkjnlqq\nd,qq\n\nqq\nsa";
+            // 
+            // tbFIND
+            // 
+            this.tbFIND.Location = new System.Drawing.Point(29, 420);
+            this.tbFIND.Multiline = true;
+            this.tbFIND.Name = "tbFIND";
+            this.tbFIND.Size = new System.Drawing.Size(124, 26);
+            this.tbFIND.TabIndex = 7;
+            this.tbFIND.Text = "qq";
+            this.tbFIND.Click += new System.EventHandler(this.tbbFIND_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(29, 352);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(124, 28);
+            this.button2.TabIndex = 8;
+            this.button2.Text = "Znajdź";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.tbbFIND_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(29, 318);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(124, 28);
+            this.button3.TabIndex = 9;
+            this.button3.Text = "Otwórz";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(29, 386);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(124, 28);
+            this.button4.TabIndex = 10;
+            this.button4.Text = "Zapisz";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // OtherPlayer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(790, 493);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.tbFIND);
+            this.Controls.Add(this.rtbFIND);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.tbDATA);
@@ -127,5 +185,10 @@
         private System.Windows.Forms.TextBox tbDATA;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RichTextBox rtbFIND;
+        private System.Windows.Forms.TextBox tbFIND;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

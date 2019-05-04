@@ -15,6 +15,8 @@ namespace gra
 {
     public partial class SendMail : Form
     {
+        string email = "";
+        string password = "";
         public SendMail()
         {
             InitializeComponent();
@@ -27,10 +29,12 @@ namespace gra
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MailMessage mail = new MailMessage(tbFROM.Text,tbTO.Text,tbSUBJECT.Text,rtbBODY.Text);
+            //MailMessage mail = new MailMessage(tbFROM.Text,tbTO.Text,tbSUBJECT.Text,rtbBODY.Text);
+            MailMessage mail = new MailMessage(email,email,email,email);
             SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
             smtpClient.Port = 587;
-            smtpClient.Credentials = new NetworkCredential(tbUSERNAME.Text,tbPASSWORD.Text);
+            //smtpClient.Credentials = new NetworkCredential(tbUSERNAME.Text,tbPASSWORD.Text);
+            smtpClient.Credentials = new NetworkCredential(email,password);
             smtpClient.EnableSsl = true;
             smtpClient.Send(mail);
         }
@@ -42,12 +46,12 @@ namespace gra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var client = new SmtpClient("poczta.o2.pl", 25)
+            var client = new SmtpClient("smtp.gmail.com", 587)
             {
-                Credentials = new NetworkCredential("korbaszael@o2.pl", "!KEVAT!!"),
+                Credentials = new NetworkCredential(email, password),
                 EnableSsl = true
             };
-            client.Send("korbaszael@o2.pl", "korbaszael@o2.pl", "test", "testbody");
+            client.Send(email,email, "test", "testbody");
         }
            
 private void button3_Click(object sender, EventArgs e)
@@ -55,9 +59,9 @@ private void button3_Click(object sender, EventArgs e)
             string smtpAddress = "smtp.gmail.com";
             int portNumber = 587;
             bool enableSSL = true;
-            string emailFromAddress = "korbaszael@gmail.com"; //Sender Email Address  
-            string password = "!KEVAT!!"; //Sender Password  
-            string emailToAddress = "korbaszael@gmail.com"; //Receiver Email Address  
+            string emailFromAddress = email; //Sender Email Address  
+            string password = this.password; //Sender Password  
+            string emailToAddress = email; //Receiver Email Address  
             string subject = "Hello";
             string body = "Hello, This is Email sending test using gmail.";
             using (MailMessage mail = new MailMessage())

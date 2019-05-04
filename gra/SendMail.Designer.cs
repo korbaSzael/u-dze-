@@ -73,7 +73,7 @@
             this.tbFROM.Name = "tbFROM";
             this.tbFROM.Size = new System.Drawing.Size(171, 20);
             this.tbFROM.TabIndex = 1;
-            this.tbFROM.Text = "@gmail.com";
+            this.tbFROM.Text = "korbashael@gmail.com";
             // 
             // tbSUBJECT
             // 
@@ -91,7 +91,7 @@
             this.tbTO.Name = "tbTO";
             this.tbTO.Size = new System.Drawing.Size(171, 20);
             this.tbTO.TabIndex = 2;
-            this.tbTO.Text = "@o2.pl";
+            this.tbTO.Text = "korbashael@gmail.com";
             // 
             // textBox5
             // 
@@ -165,6 +165,7 @@
             this.tbUSERNAME.Name = "tbUSERNAME";
             this.tbUSERNAME.Size = new System.Drawing.Size(171, 20);
             this.tbUSERNAME.TabIndex = 5;
+            this.tbUSERNAME.Text = "korbashael@gmail.com";
             // 
             // textBox2
             // 

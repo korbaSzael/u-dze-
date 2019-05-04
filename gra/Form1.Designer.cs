@@ -37,6 +37,7 @@
             this.zapiszToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zakonczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.innyGraczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ustawieniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.przemyśleniaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.barwyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.innyGraczToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -95,6 +96,7 @@
             this.menuStrip1.Size = new System.Drawing.Size(873, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
+            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // graToolStripMenuItem
             // 
@@ -113,7 +115,7 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             this.nowaToolStripMenuItem.MouseHover += new System.EventHandler(this.nowaToolStripMenuItem_MouseHover);
@@ -121,7 +123,7 @@
             // zapiszToolStripMenuItem
             // 
             this.zapiszToolStripMenuItem.Name = "zapiszToolStripMenuItem";
-            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zapiszToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.zapiszToolStripMenuItem.Text = "Zapisz";
             this.zapiszToolStripMenuItem.Click += new System.EventHandler(this.zapiszToolStripMenuItem_Click);
             this.zapiszToolStripMenuItem.MouseHover += new System.EventHandler(this.zapiszToolStripMenuItem_MouseHover);
@@ -129,7 +131,7 @@
             // wczytajToolStripMenuItem
             // 
             this.wczytajToolStripMenuItem.Name = "wczytajToolStripMenuItem";
-            this.wczytajToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wczytajToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.wczytajToolStripMenuItem.Text = "Wczytaj";
             this.wczytajToolStripMenuItem.Click += new System.EventHandler(this.wczytajToolStripMenuItem_Click);
             this.wczytajToolStripMenuItem.MouseEnter += new System.EventHandler(this.wczytajToolStripMenuItem_MouseEnter);
@@ -137,10 +139,17 @@
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.zakonczToolStripMenuItem.Text = "Zakończ";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             this.zakonczToolStripMenuItem.MouseEnter += new System.EventHandler(this.zakonczToolStripMenuItem_MouseEnter);
+            // 
+            // innyGraczToolStripMenuItem
+            // 
+            this.innyGraczToolStripMenuItem.Name = "innyGraczToolStripMenuItem";
+            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.innyGraczToolStripMenuItem.Text = "Logowanie";
+            this.innyGraczToolStripMenuItem.Click += new System.EventHandler(this.innyGraczToolStripMenuItem_Click);
             // 
             // ustawieniaToolStripMenuItem
             // 
@@ -405,7 +414,7 @@
             // odtwarzajToolStripMenuItem
             // 
             this.odtwarzajToolStripMenuItem.Name = "odtwarzajToolStripMenuItem";
-            this.odtwarzajToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.odtwarzajToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.odtwarzajToolStripMenuItem.Text = "Odtwarzaj";
             this.odtwarzajToolStripMenuItem.Click += new System.EventHandler(this.odtwarzajToolStripMenuItem_Click);
             this.odtwarzajToolStripMenuItem.MouseHover += new System.EventHandler(this.odtwarzajToolStripMenuItem_MouseHover);
@@ -413,7 +422,7 @@
             // wstzrymajToolStripMenuItem
             // 
             this.wstzrymajToolStripMenuItem.Name = "wstzrymajToolStripMenuItem";
-            this.wstzrymajToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.wstzrymajToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wstzrymajToolStripMenuItem.Text = "Wstrzymaj";
             this.wstzrymajToolStripMenuItem.Click += new System.EventHandler(this.wstzrymajToolStripMenuItem_Click);
             this.wstzrymajToolStripMenuItem.MouseHover += new System.EventHandler(this.wstzrymajToolStripMenuItem_MouseHover);
@@ -421,7 +430,7 @@
             // minimalizujToolStripMenuItem
             // 
             this.minimalizujToolStripMenuItem.Name = "minimalizujToolStripMenuItem";
-            this.minimalizujToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.minimalizujToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.minimalizujToolStripMenuItem.Text = "Minimalizuj";
             this.minimalizujToolStripMenuItem.Click += new System.EventHandler(this.minimalizujToolStripMenuItem_Click);
             this.minimalizujToolStripMenuItem.MouseHover += new System.EventHandler(this.minimalizujToolStripMenuItem_MouseHover);
@@ -481,12 +490,10 @@
             this.toolTip1.IsBalloon = true;
             this.toolTip1.ReshowDelay = 100;
             // 
-            // innyGraczToolStripMenuItem
+            // timer1
             // 
-            this.innyGraczToolStripMenuItem.Name = "innyGraczToolStripMenuItem";
-            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.innyGraczToolStripMenuItem.Text = "Inny gracz";
-            this.innyGraczToolStripMenuItem.Click += new System.EventHandler(this.innyGraczToolStripMenuItem_Click);
+            this.timer1.Interval = 10;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
@@ -563,6 +570,7 @@
         private System.Windows.Forms.ToolStripMenuItem introToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wyślijMailemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem innyGraczToolStripMenuItem;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

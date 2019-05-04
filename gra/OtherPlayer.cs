@@ -118,5 +118,61 @@ namespace gra
             }
             return plaintext;
         }
+        private void tbTFIND_Click(object sender, EventArgs e)
+        {
+            int index = 0;
+            string temp = rtbFIND.Text;
+            rtbFIND.Text = "";
+            rtbFIND.Text = temp;
+            while (index < rtbFIND.Text.LastIndexOf(tbFIND.Text))
+            {
+                rtbFIND.Find(tbFIND.Text, index, rtbFIND.TextLength, RichTextBoxFinds.None);
+                //rtbFIND.SelectionBackColor = Color.Red;
+                rtbFIND.SelectionColor = Color.Red;
+                rtbFIND.SelectionFont = new Font("MV Boli", 12, FontStyle.Bold);
+                index = rtbFIND.Text.IndexOf(tbFIND.Text, index) + 1;
+            }
+        }
+        private void tbbFIND_Click(object sender, EventArgs e)
+        {
+            int index = 0;
+            string temp = rtbFIND.Text;
+            rtbFIND.Text = "";
+            rtbFIND.Text = temp;
+            while (index<rtbFIND.Text.LastIndexOf(tbFIND.Text))
+            {
+                rtbFIND.Find(tbFIND.Text,index,rtbFIND.TextLength,RichTextBoxFinds.None);
+                //rtbFIND.SelectionBackColor = Color.Red;
+                rtbFIND.SelectionColor = Color.Red;
+                rtbFIND.SelectionFont = new Font("MV Boli", 12, FontStyle.Bold);
+                index = rtbFIND.Text.IndexOf(tbFIND.Text,index)+1;
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = common.gamePath;
+            openFileDialog1.Filter = "rtf files (*.rtf)|*.rtf";
+            openFileDialog1.FilterIndex = 0;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                rtbFIND.LoadFile(openFileDialog1.FileName);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.InitialDirectory = common.gamePath;
+            saveFileDialog1.Filter = "rtf files (*.rtf)|*.rtf";
+            saveFileDialog1.FilterIndex = 0;
+            saveFileDialog1.RestoreDirectory = true;
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                rtbFIND.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+            }
+        }
     }
 }

@@ -22,12 +22,20 @@ namespace gra{
     public partial class Form1 : Form
     {
         Bitmap gameView = null;
-        string bgImgPath;
+        Bitmap sky;
+        Bitmap frog;
+        Bitmap leaf;
+        Bitmap food;
+        Bitmap bird;
+        Point frogLocation;
+        List<Point> leafs = new List<Point>();
+        List<Point> foods = new List<Point>();
+        List<Point> birds = new List<Point>();
         public void DrawBMP(Bitmap BMP,Point where) {
             Point tmp = new Point(0, 0);
             while ((tmp.Y < BMP.Height)&&(where.Y + tmp.Y < gameView.Height))
             {
-                while ((tmp.X < BMP.Width)&&(where.X+tmp.X<gameView.Width))
+                while ((tmp.X < BMP.Width)&&(where.X+tmp.X>=0)&& (where.X + tmp.X < gameView.Width))
                 {
                     Color pixel = BMP.GetPixel(tmp.X, tmp.Y);
                     if (pixel.R == 255 && pixel.G == 255 && pixel.B == 255) {
@@ -41,15 +49,15 @@ namespace gra{
                 tmp.Y++;
             }
         }
-        public void DrawBegin() {
-            Bitmap frog1 = new Bitmap(common.gamePath + "żaba1.jpg");
-            Bitmap leaf = new Bitmap(common.gamePath + "liść.jpg");
-            Point center = new Point(pictureBox1.Width / 2, pictureBox1.Height / 2);
-            DrawBMP(frog1, new Point((center.X - frog1.Width / 2), (center.Y - frog1.Height)));
-            DrawBMP(leaf, new Point((center.X - leaf.Width / 2), center.Y));
+        public void DrawAllObjects() {
+            DrawSky();
+            foreach(Point p in leafs)DrawBMP(leaf,p);
+            foreach(Point p in birds) DrawBMP(bird, p);
+            foreach(Point p in foods) DrawBMP(food, p);
+            DrawBMP(frog, new Point(frogLocation.X, frogLocation.Y));
+            pictureBox1.Refresh();
         }
-        public void DrawSky(string fName) {
-            Bitmap sky = new Bitmap(fName);
+        public void DrawSky() {
             Point tmp = new Point(0,0);
             while (tmp.Y < pictureBox1.Image.Height)
             {
@@ -62,15 +70,69 @@ namespace gra{
             }
         }
         WMPLib.WindowsMediaPlayer player = new WMPLib.WindowsMediaPlayer();
+        bool IsCollision(Rectangle r)
+        {
+            Rectangle object1 = new Rectangle(frogLocation.X, frogLocation.Y,frog.Width,frog.Height);
+            if (!Rectangle.Intersect(object1, r).IsEmpty) return true;
+            foreach(Point p in leafs)
+            {
+                object1 = new Rectangle(p.X, p.Y, leaf.Width, leaf.Height);
+                if (!Rectangle.Intersect(object1, r).IsEmpty) return true;
+            }
+            foreach (Point p in foods)
+            {
+                object1 = new Rectangle(p.X, p.Y, food.Width, food.Height);
+                if (!Rectangle.Intersect(object1, r).IsEmpty) return true;
+            }
+            foreach (Point p in birds)
+            {
+                object1 = new Rectangle(p.X, p.Y, food.Width, food.Height);
+                if (!Rectangle.Intersect(object1, r).IsEmpty) return true;
+            }
+            return false;
+        }
+        Random rdm = new Random();
         public Form1()
         {
-            if (common.isAlreadyOpened()) System.Environment.Exit(0);
             InitializeComponent();
+            if (common.isAlreadyOpened()) System.Environment.Exit(0);
             common.gamePath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\') - 1) - 1) + 1);
+            frog = new Bitmap(common.gamePath + "żaba1.jpg");
+            leaf = new Bitmap(common.gamePath + "liść.jpg");
+            sky = new Bitmap(common.gamePath + "staw.jpg");
+            bird = new Bitmap(common.gamePath + "ptak.bmp");
+            food = new Bitmap(common.gamePath + "owad.bmp");
             pictureBox1.Image = gameView = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            bgImgPath = common.gamePath + "staw.jpg";
-            DrawSky(bgImgPath);
-            DrawBegin();
+            frogLocation = new Point(pictureBox1.Width / 2 - frog.Width / 2, pictureBox1.Height / 2- frog.Height);
+            leafs.Add(new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height));
+            for(int i = 0; i < 100;)
+            {
+                Point p = new Point(rdm.Next(0,gameView.Width*10), rdm.Next(0,gameView.Height));
+                if (!IsCollision(new Rectangle(p.X,p.Y,leaf.Width,leaf.Height)))
+                {
+                    leafs.Add(p);
+                    i++;
+                }
+            }
+            for (int i = 0; i < 30;)
+            {
+                Point p = new Point(rdm.Next(0, gameView.Width * 10), rdm.Next(0, gameView.Height));
+                if (!IsCollision(new Rectangle(p.X, p.Y, food.Width, food.Height)))
+                {
+                    foods.Add(p);
+                    i++;
+                }
+            }
+            for (int i = 0; i < 30;)
+            {
+                Point p = new Point(rdm.Next(0, gameView.Width * 10), rdm.Next(0, gameView.Height));
+                if (!IsCollision(new Rectangle(p.X, p.Y, bird.Width, bird.Height)))
+                {
+                    birds.Add(p);
+                    i++;
+                }
+            }
+            odtwarzajToolStripMenuItem_Click(null,null);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -90,6 +152,7 @@ namespace gra{
 
         private void wstzrymajToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timer1.Stop();
             player.controls.stop();
         }
 
@@ -185,10 +248,9 @@ namespace gra{
             openFileDialog.RestoreDirectory = true;
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                bgImgPath = openFileDialog.FileName;
+                sky = new Bitmap(openFileDialog.FileName);
                 toolStripStatusLabel1.Text = "Udało ci się graczu zmienić tło gry...";
-                DrawSky(bgImgPath);
-                DrawBegin();
+                DrawAllObjects();
                 pictureBox1.Refresh();
             }
         }
@@ -219,7 +281,7 @@ namespace gra{
         private void button4_MouseEnter(object sender, EventArgs e)
         {
             toolStripStatusLabel1.Text = "Tym przyciskiem zmienisz tło planszy...";
-            toolTip1.SetToolTip(button4, "Zmienisz tło z obecnego "+ bgImgPath);
+            toolTip1.SetToolTip(button4, "Zmienisz tło z obecnego");
         }
         private void notifyIconMenuItem1_Click(object sender, EventArgs e)
         {
@@ -414,6 +476,8 @@ namespace gra{
 
         private void odtwarzajToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            timer1.Enabled = true;
+            timer1.Start();
             player.URL = common.gamePath + "hudba.mp3";
             player.controls.play();
         }
@@ -444,6 +508,18 @@ namespace gra{
         {
             OtherPlayer otherPlayer = new OtherPlayer();
             otherPlayer.Show();
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            for (int i=0; i<leafs.Count;i++) leafs[i] = new Point(leafs[i].X - 4, leafs[i].Y);
+            for (int i=0; i<foods.Count; i++) foods[i] = new Point(foods[i].X - 2, foods[i].Y);
+            for (int i=0; i<birds.Count; i++) birds[i] = new Point(birds[i].X - 1, birds[i].Y);
+            DrawAllObjects();
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 
