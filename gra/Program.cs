@@ -11,12 +11,17 @@ namespace gra
         /// <summary>
         /// Główny punkt wejścia dla aplikacji.
         /// </summary>
+        public static bool shouldStartAgain = true;
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            while (shouldStartAgain)
+            {
+                shouldStartAgain = false;
+                Application.Run(new Form1());
+            }
         }
     }
 }

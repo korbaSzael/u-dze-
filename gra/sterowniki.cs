@@ -78,5 +78,28 @@ namespace gra
         {
             (dataGridView1.DataSource as DataTable).DefaultView.Sort = comboBox1.Items[comboBox1.SelectedIndex] as string;
         }
+        [DllImport("ntdll.dll")]
+        public static extern IntPtr LoadLibrary(string dllToLoad);
+        private void button1_Click(object sender, EventArgs e)
+        {
+            String unicodeString = "\u005CRegistry\\Machine\\System\\CurrentControlSet\\Services\\";
+            UnicodeEncoding unicode = new UnicodeEncoding();
+            Byte[] encodedBytes = unicode.GetBytes(unicodeString);
+            textBox1.Text = "";
+            foreach (Byte b in encodedBytes)
+            {
+                textBox1.Text += b.ToString()+" ";
+            }
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.InitialDirectory = common.gamePath;
+                openFileDialog1.Filter = "sys files (*.sys)|*.sys";
+                openFileDialog1.FilterIndex = 0;
+                openFileDialog1.RestoreDirectory = true;
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    //IntPtr pDll = LoadLibrary(openFileDialog1.SafeFileName);
+                    //odświerz
+                }
+        }
     }
 }

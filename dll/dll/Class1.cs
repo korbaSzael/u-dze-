@@ -68,10 +68,60 @@ namespace dll
             }
             return true;
         }
+        private static bool EnumTheWindowsHiddenNoName(IntPtr hWnd, IntPtr listHandle)
+        {
+            List<window> windows = GCHandle.FromIntPtr(listHandle).Target as List<window>;
+            int size = GetWindowTextLength(hWnd);
+            if (size > 0 && IsWindowVisible(hWnd))
+            {
+                size++;
+                StringBuilder sb = new StringBuilder(size);
+                GetWindowText(hWnd, sb, size);
+                window Window = new window { handle = hWnd, name = sb.ToString(), className = _GetClassName(hWnd) };
+                windows.Add(Window);
+                IntPtr childWindow = GetWindow(hWnd, 5);//GW_CHILD = 5
+                if (childWindow != null && IsWindowVisible(childWindow))
+                {
+                    Window.childWindows = new List<window>();
+                    EnumChildWindows(hWnd, EnumTheWindows, GCHandle.ToIntPtr(GCHandle.Alloc(Window.childWindows)));
+                };
+            }
+            else
+            {
+                string windowName = "";
+                if (!IsWindowVisible(hWnd)) windowName += "?";
+                if (size == 0)
+                {
+                    windowName += "!";
+                }
+                else
+                {
+                    size++;
+                    StringBuilder sb = new StringBuilder(size);
+                    GetWindowText(hWnd, sb, size);
+                    windowName += sb.ToString();
+                }
+                window Window = new window { handle = hWnd, name = windowName, className = _GetClassName(hWnd) };
+                windows.Add(Window);
+                IntPtr childWindow = GetWindow(hWnd, 5);//GW_CHILD = 5
+                if (childWindow != null && IsWindowVisible(childWindow))
+                {
+                    Window.childWindows = new List<window>();
+                    EnumChildWindows(hWnd, EnumTheWindows, GCHandle.ToIntPtr(GCHandle.Alloc(Window.childWindows)));
+                };
+            }
+            return true;
+        }
         public static List<window> allWindows()
         {
             List<window> windows = new List<window>();
             EnumWindows(EnumTheWindows, GCHandle.ToIntPtr(GCHandle.Alloc(windows)));
+            return windows;
+        }
+        public static List<window> allWindowsHiddenNoName()
+        {
+            List<window> windows = new List<window>();
+            EnumWindows(EnumTheWindowsHiddenNoName, GCHandle.ToIntPtr(GCHandle.Alloc(windows)));
             return windows;
         }
         public static string windowsToString(List<window> windows, int progress)

@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Diagnostics;
 using dll;
+using System.Threading;
 
 namespace gra{
     public partial class Form1 : Form
@@ -28,20 +29,31 @@ namespace gra{
         Bitmap food;
         Bitmap bird;
         Point frogLocation;
-        List<Point> leafs = new List<Point>();
-        List<Point> foods = new List<Point>();
-        List<Point> birds = new List<Point>();
-        public void DrawBMP(Bitmap BMP,Point where) {
+        Point[] leafs;
+        Point[] foods;
+        Point[] birds;
+        int frogJump = 0;
+        int eaten = 0;
+        bool gameOver = false;
+        public void DrawBMP(Bitmap BMP, Point where)
+        {
+            Rectangle gameViewRectangle = new Rectangle(0,0,gameView.Width,gameView.Height);
+            Rectangle drawingRectangle = new Rectangle(where.X,where.Y,BMP.Width,BMP.Height);
+            Rectangle outcomeRectangle = Rectangle.Intersect(gameViewRectangle,drawingRectangle);
+            if (outcomeRectangle.IsEmpty) return;
+            Point BMPbegin = new Point(outcomeRectangle.X-where.X,outcomeRectangle.Y-where.Y);
             Point tmp = new Point(0, 0);
-            while ((tmp.Y < BMP.Height)&&(where.Y + tmp.Y < gameView.Height))
+            while (tmp.Y < outcomeRectangle.Height)
             {
-                while ((tmp.X < BMP.Width)&&(where.X+tmp.X>=0)&& (where.X + tmp.X < gameView.Width))
+                while (tmp.X<outcomeRectangle.Width)
                 {
-                    Color pixel = BMP.GetPixel(tmp.X, tmp.Y);
-                    if (pixel.R == 255 && pixel.G == 255 && pixel.B == 255) {
-                    }else
+                    Color pixel = BMP.GetPixel(BMPbegin.X+tmp.X, BMPbegin.Y+tmp.Y);
+                    if (pixel.R == 255 && pixel.G == 255 && pixel.B == 255)
                     {
-                        gameView.SetPixel(where.X + tmp.X, where.Y + tmp.Y, pixel);
+                    }
+                    else
+                    {
+                        (pictureBox1.Image as Bitmap).SetPixel(outcomeRectangle.X + tmp.X, outcomeRectangle.Y + tmp.Y, pixel);
                     }
                     tmp.X++;
                 }
@@ -49,11 +61,12 @@ namespace gra{
                 tmp.Y++;
             }
         }
+
         public void DrawAllObjects() {
             DrawSky();
-            foreach(Point p in leafs)DrawBMP(leaf,p);
-            foreach(Point p in birds) DrawBMP(bird, p);
-            foreach(Point p in foods) DrawBMP(food, p);
+            foreach(Point p in leafs) DrawBMP(leaf,p);
+            foreach(Point p in birds) DrawBMP(bird,p);
+            foreach(Point p in foods) DrawBMP(food,p);
             DrawBMP(frog, new Point(frogLocation.X, frogLocation.Y));
             pictureBox1.Refresh();
         }
@@ -104,34 +117,38 @@ namespace gra{
             food = new Bitmap(common.gamePath + "owad.bmp");
             pictureBox1.Image = gameView = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             frogLocation = new Point(pictureBox1.Width / 2 - frog.Width / 2, pictureBox1.Height / 2- frog.Height);
-            leafs.Add(new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height));
-            for(int i = 0; i < 100;)
+            leafs = new Point[20];
+            leafs[0]=new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height);
+            foods = new Point[30];
+            birds = new Point[10];
+            for (int i = 1; i < leafs.Length;)
             {
                 Point p = new Point(rdm.Next(0,gameView.Width*10), rdm.Next(0,gameView.Height));
                 if (!IsCollision(new Rectangle(p.X,p.Y,leaf.Width,leaf.Height)))
                 {
-                    leafs.Add(p);
+                    leafs[i]=p;
                     i++;
                 }
             }
-            for (int i = 0; i < 30;)
+            for (int i = 0; i < foods.Length;)
             {
                 Point p = new Point(rdm.Next(0, gameView.Width * 10), rdm.Next(0, gameView.Height));
                 if (!IsCollision(new Rectangle(p.X, p.Y, food.Width, food.Height)))
                 {
-                    foods.Add(p);
+                    foods[i]=p;
                     i++;
                 }
             }
-            for (int i = 0; i < 30;)
+            for (int i = 0; i < birds.Length;)
             {
                 Point p = new Point(rdm.Next(0, gameView.Width * 10), rdm.Next(0, gameView.Height));
                 if (!IsCollision(new Rectangle(p.X, p.Y, bird.Width, bird.Height)))
                 {
-                    birds.Add(p);
+                    birds[i]=p;
                     i++;
                 }
             }
+            player.URL = common.gamePath + "hudba.mp3";
             odtwarzajToolStripMenuItem_Click(null,null);
         }
 
@@ -152,7 +169,7 @@ namespace gra{
 
         private void wstzrymajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timer1.Stop();
+            timer1.Enabled = false;
             player.controls.stop();
         }
 
@@ -257,7 +274,9 @@ namespace gra{
 
         private void nowaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            Program.shouldStartAgain = true;
+            wstzrymajToolStripMenuItem_Click(null,null);
+            this.Close();
         }
 
         private void button1_MouseEnter(object sender, EventArgs e)
@@ -476,10 +495,11 @@ namespace gra{
 
         private void odtwarzajToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
-            timer1.Start();
-            player.URL = common.gamePath + "hudba.mp3";
-            player.controls.play();
+            if (!gameOver)
+            {
+                timer1.Enabled = true;
+                player.controls.play();
+            }
         }
 
         private void inneToolStripMenuItem1_MouseHover(object sender, EventArgs e)
@@ -509,17 +529,84 @@ namespace gra{
             OtherPlayer otherPlayer = new OtherPlayer();
             otherPlayer.Show();
         }
+        bool isFrogOnLeaf()
+        {
+            Rectangle frogRectangle = new Rectangle(frogLocation.X, frogLocation.Y, frog.Width, frog.Height);
+            foreach (Point p in leafs)
+            {
+                Rectangle leafRectangle = new Rectangle(p.X, p.Y, leaf.Width, leaf.Height);
+                if (!Rectangle.Intersect(frogRectangle, leafRectangle).IsEmpty) return true;
+            }
+            return false;
+        }
+        bool isFrogEating()
+        {
+            Rectangle frogRectangle = new Rectangle(frogLocation.X, frogLocation.Y, frog.Width, frog.Height);
+            foreach (Point p in foods)
+            {
+                Rectangle foodRectangle = new Rectangle(p.X, p.Y, leaf.Width, leaf.Height);
+                if (!Rectangle.Intersect(frogRectangle, foodRectangle).IsEmpty) return true;
+            }
+            return false;
+        }
+        bool isBirdEatingFrog()
+        {
+            Rectangle frogRectangle = new Rectangle(frogLocation.X, frogLocation.Y, frog.Width, frog.Height);
+            foreach (Point p in birds)
+            {
+                Rectangle birdRectangle = new Rectangle(p.X, p.Y, leaf.Width, leaf.Height);
+                if (!Rectangle.Intersect(frogRectangle, birdRectangle).IsEmpty) return true;
+            }
+            return false;
+        }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            for (int i=0; i<leafs.Count;i++) leafs[i] = new Point(leafs[i].X - 4, leafs[i].Y);
-            for (int i=0; i<foods.Count; i++) foods[i] = new Point(foods[i].X - 2, foods[i].Y);
-            for (int i=0; i<birds.Count; i++) birds[i] = new Point(birds[i].X - 1, birds[i].Y);
+            if (isFrogEating()) {
+                eaten++;
+                bFOOD.Text = eaten.ToString();
+            };
+            if (frogJump > 0)
+            {
+                frogLocation.Y -= 9;
+                frogJump -= 10;
+            }
+            else
+            {
+                if (!isFrogOnLeaf()) frogLocation.Y += 13;
+            }
+            for (int i = 0; i < leafs.Length; i++) leafs[i].X -= 14;
+            for (int i = 0; i < foods.Length; i++) foods[i].X -= 14;
+            for (int i = 0; i < birds.Length; i++) birds[i].X -= 14;
             DrawAllObjects();
+            if (isBirdEatingFrog()||frogLocation.Y>gameView.Height)
+            {
+                gameOver = true;
+                wstzrymajToolStripMenuItem_Click(null, null);
+                Graphics g = Graphics.FromImage(gameView);
+                Font drawFont = new System.Drawing.Font("Segoe Script", 50);
+                SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.DarkBlue);
+                g.DrawString("Koniec",drawFont,drawBrush,new Point(100,100));
+                pictureBox1.Refresh();
+            }
+        }
+        //[STAThread]
+        //[DllExport]
+        bool RRR()
+        {
+            return true;
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
+        }
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (timer1.Enabled&&e.KeyCode==Keys.Space&&isFrogOnLeaf())
+            {
+                e.Handled = true;
+                frogJump = 100;
+            }
         }
     }
 

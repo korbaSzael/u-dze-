@@ -23,11 +23,11 @@ namespace gra
             List<TreeNode> ltn = new List<TreeNode>();
             if(allWindows==null) return ltn;
             foreach (window wnd in allWindows) {
-                TreeNode tn = new TreeNode();
-                tn.Text = wnd.name;
-                tn.Tag = wnd;
-                tn.Nodes.AddRange(getTreeNodes(wnd.childWindows).ToArray());
-                ltn.Add(tn);
+                    TreeNode tn = new TreeNode();
+                    tn.Text = wnd.name;
+                    tn.Tag = wnd;
+                    tn.Nodes.AddRange(getTreeNodes(wnd.childWindows).ToArray());
+                    ltn.Add(tn);
             }
             
             return ltn;
