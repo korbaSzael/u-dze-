@@ -112,7 +112,7 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             this.nowaToolStripMenuItem.MouseHover += new System.EventHandler(this.nowaToolStripMenuItem_MouseHover);
@@ -120,7 +120,7 @@
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.zakonczToolStripMenuItem.Text = "Zakończ";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             this.zakonczToolStripMenuItem.MouseEnter += new System.EventHandler(this.zakonczToolStripMenuItem_MouseEnter);
@@ -128,7 +128,7 @@
             // innyGraczToolStripMenuItem
             // 
             this.innyGraczToolStripMenuItem.Name = "innyGraczToolStripMenuItem";
-            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
             this.innyGraczToolStripMenuItem.Text = "Logowanie";
             this.innyGraczToolStripMenuItem.Click += new System.EventHandler(this.innyGraczToolStripMenuItem_Click);
             // 
@@ -197,6 +197,7 @@
             // 
             // wyślijMailemToolStripMenuItem
             // 
+            this.wyślijMailemToolStripMenuItem.Enabled = false;
             this.wyślijMailemToolStripMenuItem.Name = "wyślijMailemToolStripMenuItem";
             this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.wyślijMailemToolStripMenuItem.Text = "Wyślij mailem";
