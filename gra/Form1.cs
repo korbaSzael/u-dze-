@@ -61,13 +61,20 @@ namespace gra{
                 tmp.Y++;
             }
         }
-
+        public void drawGameOver()
+        {
+            Graphics g = Graphics.FromImage(gameView);
+            Font drawFont = new System.Drawing.Font("Segoe Script", 50);
+            SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.DarkBlue);
+            g.DrawString("Koniec", drawFont, drawBrush, new Point(100, 100));
+        }
         public void DrawAllObjects() {
             DrawSky();
             foreach(Point p in leafs) DrawBMP(leaf,p);
             foreach(Point p in birds) DrawBMP(bird,p);
             foreach(Point p in foods) DrawBMP(food,p);
             DrawBMP(frog, new Point(frogLocation.X, frogLocation.Y));
+            if (gameOver) drawGameOver();
             pictureBox1.Refresh();
         }
         public void DrawSky() {
@@ -117,10 +124,10 @@ namespace gra{
             food = new Bitmap(common.gamePath + "owad.bmp");
             pictureBox1.Image = gameView = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             frogLocation = new Point(pictureBox1.Width / 2 - frog.Width / 2, pictureBox1.Height / 2- frog.Height);
-            leafs = new Point[20];
-            leafs[0]=new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height);
-            foods = new Point[30];
-            birds = new Point[10];
+            leafs = new Point[rdm.Next(20,70)];
+            foods = new Point[rdm.Next(10,100)];
+            birds = new Point[rdm.Next(0,25)];
+            leafs[0] = new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height);
             for (int i = 1; i < leafs.Length;)
             {
                 Point p = new Point(rdm.Next(0,gameView.Width*10), rdm.Next(0,gameView.Height));
@@ -315,6 +322,9 @@ namespace gra{
             menuItem1.Click += new System.EventHandler(notifyIconMenuItem1_Click);
             contextMenu1.MenuItems.AddRange(new MenuItem[] { menuItem1 });
             notifyIcon1.ShowBalloonTip(1000);
+            if (common.loggedUser != "")changeToLogout();
+            //wstzrymajToolStripMenuItem_Click(null,null);
+            //innyGraczToolStripMenuItem_Click(null,null);
         }
 
         private void bibliotekiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -526,8 +536,7 @@ namespace gra{
 
         private void innyGraczToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OtherPlayer otherPlayer = new OtherPlayer();
-            otherPlayer.Show();
+            OtherPlayer otherPlayer = new OtherPlayer(this);
         }
         bool isFrogOnLeaf()
         {
@@ -577,25 +586,20 @@ namespace gra{
             for (int i = 0; i < leafs.Length; i++) leafs[i].X -= 14;
             for (int i = 0; i < foods.Length; i++) foods[i].X -= 14;
             for (int i = 0; i < birds.Length; i++) birds[i].X -= 14;
-            DrawAllObjects();
             if (isBirdEatingFrog()||frogLocation.Y>gameView.Height)
             {
                 gameOver = true;
                 wstzrymajToolStripMenuItem_Click(null, null);
-                Graphics g = Graphics.FromImage(gameView);
-                Font drawFont = new System.Drawing.Font("Segoe Script", 50);
-                SolidBrush drawBrush = new System.Drawing.SolidBrush(System.Drawing.Color.DarkBlue);
-                g.DrawString("Koniec",drawFont,drawBrush,new Point(100,100));
-                pictureBox1.Refresh();
+                if (common.loggedUser == "") common.loggedUser = "qq";
+                if (common.loggedUser != "")
+                {
+                    gameResult gr = new gameResult() { name=common.loggedUser,points=eaten};
+                    common.database.gameResult.InsertOnSubmit(gr);
+                    common.database.SubmitChanges();
+                }
             }
+            DrawAllObjects();
         }
-        //[STAThread]
-        //[DllExport]
-        bool RRR()
-        {
-            return true;
-        }
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
@@ -607,6 +611,30 @@ namespace gra{
                 e.Handled = true;
                 frogJump = 100;
             }
+        }
+
+        private void bFOOD_MouseHover(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu zlicza się zdobyte punkty...";
+            toolTip1.SetToolTip(bFOOD, "Po naciśnięciu ukażą się statystyki");
+        }
+
+        private void bFOOD_Click(object sender, EventArgs e)
+        {
+            statystics StatysticsWindow = new statystics();
+            StatysticsWindow.Show();
+            toolStripStatusLabel1.Text = "Ukazano statystyki";
+        }
+        public void changeToLogout()
+        {
+            innyGraczToolStripMenuItem.Text = "Wyloguj";
+            Text = common.loggedUser + " - Gra zręcznościowa żabka";
+        }
+        public void changeToLogin()
+        {
+            innyGraczToolStripMenuItem.Text = "Logowanie";
+            Text = "Gra zręcznościowa żabka";
+            common.loggedUser = "";
         }
     }
 
@@ -671,5 +699,7 @@ namespace gra{
             }
             return alreadyOpened;
         }
+        public static DatabaseDataContext database = new DatabaseDataContext();
+        public static string loggedUser = "";
     }
 }

@@ -9,64 +9,56 @@ using System.Text;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace gra
 {
     public partial class OtherPlayer : Form
     {
+        RegistryKey gameKey = Registry.CurrentUser.OpenSubKey("żabka", true);
+        void fillCombobox()
+        {
+            login.Items.Clear();
+            String[] players = gameKey.GetValueNames();
+            foreach (string player in players)
+            {
+                login.Items.Add(player);
+            }
+            if (login.Items.Count != 0)
+            {
+                login.SelectedIndex = 0;
+                bLogin.Enabled = true;
+            }
+        }
         public OtherPlayer()
         {
             InitializeComponent();
+        }
+        Form1 mainForm = null;
+        public OtherPlayer(Form1 formMain)
+        {
+            mainForm = formMain;
+            if (common.loggedUser!="")
+            {
+                mainForm.changeToLogin();
+                Close();
+            }
+            else
+            {
+                InitializeComponent();
+                if (gameKey == null) gameKey = Registry.CurrentUser.CreateSubKey("żabka");
+                fillCombobox();
+                Show();
+            }
         }
 
         private void OtherPlayer_Load(object sender, EventArgs e)
         {
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            byte[] plainBytes=Encoding.ASCII.GetBytes("to sobie zaszyfrujemy");
-            byte[] plainKey= Encoding.ASCII.GetBytes("1234567890123456");
-            SymmetricAlgorithm desObj=Rijndael.Create();
-            desObj.Key = plainKey;
-            desObj.Mode = CipherMode.CBC;
-            desObj.Padding = PaddingMode.PKCS7;
-            MemoryStream ms = new MemoryStream();
-            CryptoStream cs = new CryptoStream(ms,desObj.CreateEncryptor(),CryptoStreamMode.Write);
-            cs.Write(plainBytes,0,plainBytes.Length);
-            byte[] cipherBytes;
-            cipherBytes= ms.ToArray();
-            cs.Close();
-            ms.Close();
-            tbENCRYPTED.Text = Encoding.ASCII.GetString(cipherBytes);
-
-            SymmetricAlgorithm desObj2 = Rijndael.Create();
-            desObj2.Key = plainKey;
-            desObj2.Mode = CipherMode.CBC;
-            desObj2.Padding = PaddingMode.PKCS7;
-            MemoryStream ms1 = new MemoryStream();
-            CryptoStream cs1 = new CryptoStream(ms1, desObj2.CreateDecryptor(),CryptoStreamMode.Read);
-            cs1.Read(cipherBytes,0,cipherBytes.Length);
-            byte[] plainBytes2;
-            plainBytes2 = ms1.ToArray();
-            cs1.Close();
-            ms1.Close();
-            tbDECRYPTED.Text = Encoding.ASCII.GetString(plainBytes2);
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            if (tbDATA.Text=="") return;
-            using (Rijndael myRijndael = Rijndael.Create())
-            {
-                myRijndael.Key = Encoding.ASCII.GetBytes("1234567890123456");
-                myRijndael.IV = Encoding.ASCII.GetBytes("1234567890123456");
-                byte[] encrypted = EncryptStringToBytes(tbDATA.Text, myRijndael.Key, myRijndael.IV);
-                tbENCRYPTED.Text = Encoding.ASCII.GetString(encrypted);
-                string roundtrip = DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
-                tbDECRYPTED.Text = roundtrip;
-            }
+            if (tbFIND.Text=="") return;
         }
         static byte[] EncryptStringToBytes(string plainText, byte[] Key, byte[] IV)
         {
@@ -118,21 +110,6 @@ namespace gra
             }
             return plaintext;
         }
-        private void tbTFIND_Click(object sender, EventArgs e)
-        {
-            int index = 0;
-            string temp = rtbFIND.Text;
-            rtbFIND.Text = "";
-            rtbFIND.Text = temp;
-            while (index < rtbFIND.Text.LastIndexOf(tbFIND.Text))
-            {
-                rtbFIND.Find(tbFIND.Text, index, rtbFIND.TextLength, RichTextBoxFinds.None);
-                //rtbFIND.SelectionBackColor = Color.Red;
-                rtbFIND.SelectionColor = Color.Red;
-                rtbFIND.SelectionFont = new Font("MV Boli", 12, FontStyle.Bold);
-                index = rtbFIND.Text.IndexOf(tbFIND.Text, index) + 1;
-            }
-        }
         private void tbbFIND_Click(object sender, EventArgs e)
         {
             int index = 0;
@@ -142,7 +119,7 @@ namespace gra
             while (index<rtbFIND.Text.LastIndexOf(tbFIND.Text))
             {
                 rtbFIND.Find(tbFIND.Text,index,rtbFIND.TextLength,RichTextBoxFinds.None);
-                //rtbFIND.SelectionBackColor = Color.Red;
+                rtbFIND.SelectionBackColor = Color.Gray;
                 rtbFIND.SelectionColor = Color.Red;
                 rtbFIND.SelectionFont = new Font("MV Boli", 12, FontStyle.Bold);
                 index = rtbFIND.Text.IndexOf(tbFIND.Text,index)+1;
@@ -172,6 +149,67 @@ namespace gra
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 rtbFIND.SaveFile(saveFileDialog1.FileName, RichTextBoxStreamType.RichText);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (Rijndael myRijndael = Rijndael.Create())
+            {
+                myRijndael.Key = Encoding.ASCII.GetBytes("1234567890123456");
+                myRijndael.IV = Encoding.ASCII.GetBytes("1234567890123456");
+                byte[] encrypted = EncryptStringToBytes("\n"+tbPassword.Text, myRijndael.Key, myRijndael.IV);
+                gameKey.SetValue(login.Text,encrypted, RegistryValueKind.Binary);
+            }
+            fillCombobox();
+            bCreate.Enabled = false;
+        }
+
+        private void comboBox1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (login.Text == "")
+            {
+                bCreate.Enabled = false;
+                bLogin.Enabled = false;
+                login.SelectedIndex = -1;
+                return;
+            }
+            foreach (string player in login.Items)
+            {
+                if (login.Text == player)
+                {
+                    bCreate.Enabled = false;
+                    bLogin.Enabled = true;
+                    login.SelectedItem = login.Text;
+                    return;
+                }
+            }
+            bCreate.Enabled = true;
+            bLogin.Enabled = false;
+            login.SelectedIndex = -1;
+        }
+
+        private void bLogin_Click(object sender, EventArgs e)
+        {
+            string decrypted;
+            using (Rijndael myRijndael = Rijndael.Create())
+            {
+                byte[] encrypted = (byte[])gameKey.GetValue(login.SelectedItem as string, RegistryValueKind.Binary);
+                myRijndael.Key = Encoding.ASCII.GetBytes("1234567890123456");
+                myRijndael.IV = Encoding.ASCII.GetBytes("1234567890123456");
+                decrypted = DecryptStringFromBytes(encrypted, myRijndael.Key, myRijndael.IV);
+            }
+            string password= decrypted.Split(new char[] { '\n'},2, StringSplitOptions.None)[1]; ;
+            if (password==tbPassword.Text)
+            {
+                bLogin.ForeColor = Color.Black;
+                common.loggedUser = (string)login.SelectedItem;
+                mainForm.changeToLogout();
+                Close();
+            }
+            else
+            {
+                bLogin.ForeColor = Color.Red;
             }
         }
     }

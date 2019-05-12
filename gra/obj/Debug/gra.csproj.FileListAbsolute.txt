@@ -159,3 +159,6 @@ C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\System.Xml.XmlSerializer
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\System.Xml.XPath.dll
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\System.Xml.XPath.XDocument.dll
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.exe.config
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.statystics.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\database.mdf
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\database_log.ldf

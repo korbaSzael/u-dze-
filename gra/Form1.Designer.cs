@@ -190,7 +190,7 @@
             // introToolStripMenuItem
             // 
             this.introToolStripMenuItem.Name = "introToolStripMenuItem";
-            this.introToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.introToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.introToolStripMenuItem.Text = "Intro";
             this.introToolStripMenuItem.Click += new System.EventHandler(this.introToolStripMenuItem_Click);
             this.introToolStripMenuItem.MouseHover += new System.EventHandler(this.introToolStripMenuItem_MouseHover);
@@ -199,7 +199,7 @@
             // 
             this.wyślijMailemToolStripMenuItem.Enabled = false;
             this.wyślijMailemToolStripMenuItem.Name = "wyślijMailemToolStripMenuItem";
-            this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.wyślijMailemToolStripMenuItem.Text = "Wyślij mailem";
             this.wyślijMailemToolStripMenuItem.Click += new System.EventHandler(this.wyślijMailemToolStripMenuItem_Click);
             // 
@@ -219,7 +219,7 @@
             // wyświetlToolStripMenuItem
             // 
             this.wyświetlToolStripMenuItem.Name = "wyświetlToolStripMenuItem";
-            this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.wyświetlToolStripMenuItem.Text = "Wyświetl";
             this.wyświetlToolStripMenuItem.Click += new System.EventHandler(this.wyświetlToolStripMenuItem_Click);
             this.wyświetlToolStripMenuItem.MouseEnter += new System.EventHandler(this.wyświetlToolStripMenuItem_MouseEnter);
@@ -227,7 +227,7 @@
             // oGrzeToolStripMenuItem
             // 
             this.oGrzeToolStripMenuItem.Name = "oGrzeToolStripMenuItem";
-            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.oGrzeToolStripMenuItem.Text = "O grze";
             this.oGrzeToolStripMenuItem.Click += new System.EventHandler(this.oGrzeToolStripMenuItem_Click);
             this.oGrzeToolStripMenuItem.MouseEnter += new System.EventHandler(this.oGrzeToolStripMenuItem_MouseEnter);
@@ -235,7 +235,7 @@
             // bibliotekiToolStripMenuItem
             // 
             this.bibliotekiToolStripMenuItem.Name = "bibliotekiToolStripMenuItem";
-            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.bibliotekiToolStripMenuItem.Text = "Biblioteki";
             this.bibliotekiToolStripMenuItem.Click += new System.EventHandler(this.bibliotekiToolStripMenuItem_Click);
             this.bibliotekiToolStripMenuItem.MouseEnter += new System.EventHandler(this.bibliotekiToolStripMenuItem_MouseEnter);
@@ -243,7 +243,7 @@
             // zrzutyToolStripMenuItem
             // 
             this.zrzutyToolStripMenuItem.Name = "zrzutyToolStripMenuItem";
-            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.zrzutyToolStripMenuItem.Text = "Zrzuty";
             this.zrzutyToolStripMenuItem.Click += new System.EventHandler(this.zrzutyToolStripMenuItem_Click);
             this.zrzutyToolStripMenuItem.MouseHover += new System.EventHandler(this.zrzutyToolStripMenuItem_MouseHover);
@@ -251,7 +251,7 @@
             // sterownikiToolStripMenuItem
             // 
             this.sterownikiToolStripMenuItem.Name = "sterownikiToolStripMenuItem";
-            this.sterownikiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sterownikiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sterownikiToolStripMenuItem.Text = "Sterowniki";
             this.sterownikiToolStripMenuItem.Click += new System.EventHandler(this.sterownikiToolStripMenuItem_Click);
             this.sterownikiToolStripMenuItem.MouseHover += new System.EventHandler(this.sterownikiToolStripMenuItem_MouseHover);
@@ -374,6 +374,8 @@
             this.bFOOD.TabIndex = 4;
             this.bFOOD.Text = "00000";
             this.bFOOD.UseVisualStyleBackColor = true;
+            this.bFOOD.Click += new System.EventHandler(this.bFOOD_Click);
+            this.bFOOD.MouseHover += new System.EventHandler(this.bFOOD_MouseHover);
             // 
             // statusStrip1
             // 
@@ -478,10 +480,14 @@
             // 
             // toolTip1
             // 
+            this.toolTip1.AutomaticDelay = 50;
             this.toolTip1.AutoPopDelay = 5000;
-            this.toolTip1.InitialDelay = 100;
+            this.toolTip1.InitialDelay = 50;
             this.toolTip1.IsBalloon = true;
-            this.toolTip1.ReshowDelay = 100;
+            this.toolTip1.ReshowDelay = 10;
+            this.toolTip1.ShowAlways = true;
+            this.toolTip1.UseAnimation = false;
+            this.toolTip1.UseFading = false;
             // 
             // timer1
             // 
