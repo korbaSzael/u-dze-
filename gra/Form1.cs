@@ -123,12 +123,14 @@ namespace gra{
             bird = new Bitmap(common.gamePath + "ptak.bmp");
             food = new Bitmap(common.gamePath + "owad.bmp");
             pictureBox1.Image = gameView = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            toolStripProgressBar1.Maximum = gameView.Width * 10 + 1;
             frogLocation = new Point(pictureBox1.Width / 2 - frog.Width / 2, pictureBox1.Height / 2- frog.Height);
             leafs = new Point[rdm.Next(20,70)];
             foods = new Point[rdm.Next(10,100)];
             birds = new Point[rdm.Next(0,25)];
             leafs[0] = new Point((frogLocation.X + frog.Width / 2 - leaf.Width / 2), frogLocation.Y + frog.Height);
-            for (int i = 1; i < leafs.Length;)
+            leafs[1] = new Point(gameView.Width * 10, rdm.Next(0, gameView.Height));
+            for (int i = 2; i < leafs.Length;)
             {
                 Point p = new Point(rdm.Next(0,gameView.Width*10), rdm.Next(0,gameView.Height));
                 if (!IsCollision(new Rectangle(p.X,p.Y,leaf.Width,leaf.Height)))
@@ -538,13 +540,18 @@ namespace gra{
         {
             OtherPlayer otherPlayer = new OtherPlayer(this);
         }
+        int justUnderLeaf;
         bool isFrogOnLeaf()
         {
             Rectangle frogRectangle = new Rectangle(frogLocation.X, frogLocation.Y, frog.Width, frog.Height);
             foreach (Point p in leafs)
             {
                 Rectangle leafRectangle = new Rectangle(p.X, p.Y, leaf.Width, leaf.Height);
-                if (!Rectangle.Intersect(frogRectangle, leafRectangle).IsEmpty) return true;
+                if (!Rectangle.Intersect(frogRectangle, leafRectangle).IsEmpty)
+                {
+                    justUnderLeaf = leaf.Height + p.Y;
+                    return true;
+                }
             }
             return false;
         }
@@ -570,6 +577,7 @@ namespace gra{
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
+            toolStripProgressBar1.Value = gameView.Width*10- leafs[1].X;
             if (isFrogEating()) {
                 eaten++;
                 bFOOD.Text = eaten.ToString();
@@ -590,7 +598,6 @@ namespace gra{
             {
                 gameOver = true;
                 wstzrymajToolStripMenuItem_Click(null, null);
-                if (common.loggedUser == "") common.loggedUser = "qq";
                 if (common.loggedUser != "")
                 {
                     gameResult gr = new gameResult() { name=common.loggedUser,points=eaten};
@@ -606,10 +613,21 @@ namespace gra{
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            if (timer1.Enabled&&e.KeyCode==Keys.Space&&isFrogOnLeaf())
+            if (timer1.Enabled && e.KeyCode == Keys.Space && isFrogOnLeaf())
             {
                 e.Handled = true;
                 frogJump = 100;
+            }
+            else if(timer1.Enabled && e.KeyCode == Keys.Down && isFrogOnLeaf()) {
+                e.Handled = true;
+                if (frogJump != 0)
+                {
+                    frogJump = 0;
+                }
+                else
+                {
+                    frogLocation.Y += 27;
+                }
             }
         }
 
@@ -635,6 +653,11 @@ namespace gra{
             innyGraczToolStripMenuItem.Text = "Logowanie";
             Text = "Gra zręcznościowa żabka";
             common.loggedUser = "";
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 

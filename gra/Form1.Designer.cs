@@ -306,6 +306,7 @@
             helpProvider1.SetShowHelp(this.flowLayoutPanel1, true);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(306, 398);
             this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             this.flowLayoutPanel1.MouseHover += new System.EventHandler(this.flowLayoutPanel1_MouseHover);
             // 
             // button1
@@ -435,7 +436,6 @@
             this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripProgressBar1.Maximum = 1000;
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.toolStripProgressBar1.RightToLeftLayout = true;
             this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 16);
             this.toolStripProgressBar1.Step = 1;

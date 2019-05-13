@@ -56,7 +56,7 @@ namespace gra
                     ce.srs.Points.Add(new DataPoint(ce.order++, gr.points));
                 }
                 else {
-                    lce[where].srs.Points.Add(new DataPoint(lce[where].count++, gr.points));
+                    lce[where].srs.Points.Add(new DataPoint(lce[where].order++, gr.points));
                     lce[where].count += gr.points;
                 }
             }
