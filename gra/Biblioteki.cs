@@ -11,22 +11,24 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Runtime.ConstrainedExecution;
 using System.Security;
+using System.IO;
 
 namespace gra
 {
     public partial class Biblioteki : Form
     {
-        DataTable table = null;
+        DataTable tableExports = null;
+        DataTable tableImports = null;
         public Biblioteki()
         {
             InitializeComponent();
         }
         private void bExports_Click(object sender, EventArgs e)
         {
-            table = new DataTable();
-            table.Columns.Add("name", typeof(string));
-            table.Columns.Add("address", typeof(cAddress));
-            table.Columns.Add("size", typeof(cSize));
+            tableExports = new DataTable();
+            tableExports.Columns.Add("export name", typeof(string));
+            tableExports.Columns.Add("address", typeof(cAddress));
+            tableExports.Columns.Add("size", typeof(cSize));
                 IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
                 ulong baseOfDll;
                 bool status;
@@ -34,15 +36,15 @@ namespace gra
                 baseOfDll = SymLoadModuleEx(pHandle, IntPtr.Zero, (comboBox1.SelectedItem as cbModule).file, null, 0, 0, IntPtr.Zero, 0);
                 if (baseOfDll != 0 && SymEnumerateSymbols64(pHandle, baseOfDll, EnumSyms, IntPtr.Zero) != false)
                 {
-                    dataGridView1.DataSource = table;
-                    (dataGridView1.DataSource as DataTable).DefaultView.Sort = "name";
+                    dataGridView1.DataSource = tableExports;
+                    (dataGridView1.DataSource as DataTable).DefaultView.Sort = "export name";
                 }
                 SymCleanup(pHandle);
                 CloseHandle(pHandle);
             }
-        public bool EnumSyms(string name, ulong address, uint size, IntPtr context)
+        public bool EnumSyms(string name, ulong address, uint givenSize, IntPtr context)
         {
-            table.Rows.Add(name,new cAddress{address = address}, new cSize { size = address });
+            tableExports.Rows.Add(name,new cAddress{address = address}, new cSize { size = givenSize });
             return true;
         }
         class cbModule
@@ -74,6 +76,7 @@ namespace gra
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBox1.Font = new Font(comboBox1.Font, FontStyle.Regular);
             textBox1.Text = (comboBox1.SelectedItem as cbModule).name;
             textBox3.Text = (comboBox1.SelectedItem as cbModule).basee.ToString("X8");
             textBox4.Text = (comboBox1.SelectedItem as cbModule).entry.ToString("X8");
@@ -83,6 +86,7 @@ namespace gra
             if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu")
             {
                 bExports_Click(null,null);
+                computeDLLimports();
             }
         }
 
@@ -110,6 +114,7 @@ namespace gra
         static extern bool CloseHandle(IntPtr hObject);
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
+            comboBox2.Font = new Font(comboBox2.Font, FontStyle.Regular);
             Process current = Process.GetProcessById((comboBox2.SelectedItem as cbProcess).id);
             comboBox1.Items.Clear();
             try
@@ -141,23 +146,6 @@ namespace gra
         {
 
         }
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);//out IntPtr lpNumberOfBytesRead);//int lpNumberOfBytesRead
-        [DllImport("kernel32.dll")]
-        static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress,int dwSize, uint flNewProtect, out uint lpflOldProtect);
-        private void textBox2_DoubleClick(object sender, EventArgs e)
-        {
-            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu") {
-                IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
-                byte[] contents = new byte[(comboBox1.SelectedItem as cbModule).mSize];
-                uint lpflOldProtect;
-                textBox1.Text = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, (comboBox1.SelectedItem as cbModule).mSize, 0x40, out lpflOldProtect).ToString();
-                IntPtr lpNumberOfBytesRead;//null??
-                textBox1.Text += ReadProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee,contents, (comboBox1.SelectedItem as cbModule).mSize, out lpNumberOfBytesRead).ToString();
-                CloseHandle(pHandle);
-            }
-        }
-
         private void textBox6_TextChanged(object sender, EventArgs e)
         {
 
@@ -169,15 +157,14 @@ namespace gra
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.InitialDirectory = common.gamePath;
-            openFileDialog1.Filter = "dll files (*.dll)|*.dll";
+            openFileDialog1.Filter = "dll files (*.dll)|*.dll|exe files (*.exe)|*.exe";
             openFileDialog1.FilterIndex = 0;
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                IntPtr pDll = LoadLibrary(openFileDialog1.SafeFileName);
+                IntPtr pDll = LoadLibrary(openFileDialog1.FileName);
                 comboBox2_SelectedIndexChanged(null,null);
             }
-
         }
         [DllImport("kernel32.dll", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -223,5 +210,104 @@ namespace gra
                 return size.ToString("X8");
             }
         }
+        [DllImport("kernel32")]
+        public static extern IntPtr CreateRemoteThread(IntPtr hProcess,IntPtr lpThreadAttributes,uint dwStackSize,IntPtr lpStartAddress,IntPtr lpParameter,uint dwCreationFlags,out uint lpThreadId);
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu")
+            {
+                IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
+                uint dwThreadId;
+                IntPtr hThread = CreateRemoteThread(pHandle, IntPtr.Zero, 0, new IntPtr(int.Parse(textBox12.Text, System.Globalization.NumberStyles.HexNumber)), new IntPtr(0), 0, out dwThreadId);
+                textBox1.Text += dwThreadId.ToString();
+                CloseHandle(pHandle);
+            }
+        }
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern bool ReadProcessMemory(IntPtr hProcess, IntPtr lpBaseAddress, [Out] byte[] lpBuffer, int dwSize, out IntPtr lpNumberOfBytesRead);
+        [DllImport("kernel32.dll", SetLastError = true)]
+        public static extern bool WriteProcessMemory(IntPtr hProcess,IntPtr lpBaseAddress,byte[] lpBuffer,Int32 nSize,out IntPtr lpNumberOfBytesWritten);
+        [DllImport("kernel32.dll")]
+        static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, int dwSize, uint flNewProtect, out uint lpflOldProtect);
+        private void comboBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu" && e.KeyCode == Keys.Right)
+            {
+                string DIR = common.gamePath + DateTime.Today.ToString("yyyyMMdd");
+                if (!Directory.Exists(DIR)) Directory.CreateDirectory(DIR);
+                DIR += "\\" + (comboBox2.SelectedItem as cbProcess).name;
+                if (!Directory.Exists(DIR)) Directory.CreateDirectory(DIR);
+                DIR += "\\" + (comboBox1.SelectedItem as cbModule).name;
+                bool vp, rpm;
+                using (FileStream fs = File.Create(DIR))
+                {
+                    IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
+                    byte[] contents = new byte[(comboBox1.SelectedItem as cbModule).mSize];
+                    uint lpflOldProtect;
+                    vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, (comboBox1.SelectedItem as cbModule).mSize, 0x40, out lpflOldProtect);
+                    IntPtr lpNumberOfBytesRead;
+                    rpm = ReadProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents, (comboBox1.SelectedItem as cbModule).mSize, out lpNumberOfBytesRead);
+                    CloseHandle(pHandle);
+                    fs.Write(contents, 0, contents.Length);
+                }
+                if (vp == false || rpm == false)
+                {
+                    File.Delete(DIR);
+                    comboBox1.Font = new Font(comboBox1.Font, FontStyle.Strikeout);
+                    e.Handled = true;
+                }
+            }
+            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu" && e.KeyCode == Keys.Left && Directory.Exists(common.gamePath + DateTime.Today.ToString("yyyyMMdd")) && Directory.Exists(common.gamePath + DateTime.Today.ToString("yyyyMMdd")+"\\" + (comboBox2.SelectedItem as cbProcess).name)&& File.Exists(common.gamePath + DateTime.Today.ToString("yyyyMMdd") + "\\" + (comboBox2.SelectedItem as cbProcess).name+ "\\" + (comboBox1.SelectedItem as cbModule).name))
+            {
+                byte[] contents=File.ReadAllBytes(common.gamePath + DateTime.Today.ToString("yyyyMMdd") + "\\" + (comboBox2.SelectedItem as cbProcess).name + "\\" + (comboBox1.SelectedItem as cbModule).name);
+                bool vp=false, rpm=false;
+                if (contents.Length== (comboBox1.SelectedItem as cbModule).mSize)
+                {
+                    IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
+                    uint lpflOldProtect;
+                    vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, (comboBox1.SelectedItem as cbModule).mSize, 0x40, out lpflOldProtect);
+                    IntPtr lpNumberOfBytesWrite;
+                    rpm = WriteProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents, (comboBox1.SelectedItem as cbModule).mSize, out lpNumberOfBytesWrite);
+                    CloseHandle(pHandle);
+                }
+                if (vp == false || rpm == false)
+                {
+                    comboBox1.Font = new Font(comboBox1.Font, FontStyle.Strikeout);
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private void comboBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu" && e.KeyCode == Keys.Right)
+            {
+                cbModule lastModule = comboBox1.SelectedItem as cbModule;
+                foreach (cbModule currentModule in comboBox1.Items)
+                {
+                    comboBox1.SelectedItem = currentModule;
+                    comboBox1_KeyDown(null, new KeyEventArgs(Keys.Right));
+                }
+                comboBox1.SelectedItem = lastModule;
+            }
+            if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu" && e.KeyCode == Keys.Left)
+            {
+                cbModule lastModule = comboBox1.SelectedItem as cbModule;
+                foreach (cbModule currentModule in comboBox1.Items)
+                {
+                    comboBox1.SelectedItem = currentModule;
+                    comboBox1_KeyDown(null, new KeyEventArgs(Keys.Left));
+                }
+                comboBox1.SelectedItem = lastModule;
+            }
+        }
+        void computeDLLimports()
+        {
+            tableImports = new DataTable();
+            computeImports ci = new computeImports((comboBox1.SelectedItem as cbModule).file, tableImports);
+            dataGridView2.DataSource = tableImports;
+        }
     }
+
 }
+

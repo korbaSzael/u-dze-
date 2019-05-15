@@ -23,5 +23,9 @@ namespace gra
                 Application.Run(new Form1());
             }
         }
+        public static void tuZaczynamy()
+        {
+            MessageBox.Show("dokładnie");
+        }
     }
 }
