@@ -8,9 +8,6 @@ namespace gra
 {
     static class Program
     {
-        /// <summary>
-        /// Główny punkt wejścia dla aplikacji.
-        /// </summary>
         public static bool shouldStartAgain = true;
         [STAThread]
         static void Main()
@@ -22,10 +19,6 @@ namespace gra
                 shouldStartAgain = false;
                 Application.Run(new Form1());
             }
-        }
-        public static void tuZaczynamy()
-        {
-            MessageBox.Show("dokładnie");
         }
     }
 }

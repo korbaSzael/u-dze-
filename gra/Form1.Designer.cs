@@ -218,6 +218,7 @@
             // 
             // wyświetlToolStripMenuItem
             // 
+            this.wyświetlToolStripMenuItem.Enabled = false;
             this.wyświetlToolStripMenuItem.Name = "wyświetlToolStripMenuItem";
             this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.wyświetlToolStripMenuItem.Text = "Wyświetl";
@@ -306,7 +307,6 @@
             helpProvider1.SetShowHelp(this.flowLayoutPanel1, true);
             this.flowLayoutPanel1.Size = new System.Drawing.Size(306, 398);
             this.flowLayoutPanel1.TabIndex = 1;
-            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             this.flowLayoutPanel1.MouseHover += new System.EventHandler(this.flowLayoutPanel1_MouseHover);
             // 
             // button1

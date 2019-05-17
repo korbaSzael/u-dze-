@@ -110,6 +110,7 @@
     <Compile Include="OtherPlayer.Designer.cs">
       <DependentUpon>OtherPlayer.cs</DependentUpon>
     </Compile>
+    <Compile Include="privilege.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendMail.cs">

@@ -654,14 +654,9 @@ namespace gra{
             Text = "Gra zręcznościowa żabka";
             common.loggedUser = "";
         }
+}
 
-        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-    }
-
-    public class common
+public class common
     {
         public static string gamePath = "";
         public static string[] pathsToFiles(string rootPath, string fileName)

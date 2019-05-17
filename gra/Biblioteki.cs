@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
@@ -229,6 +224,20 @@ namespace gra
         public static extern bool WriteProcessMemory(IntPtr hProcess,IntPtr lpBaseAddress,byte[] lpBuffer,Int32 nSize,out IntPtr lpNumberOfBytesWritten);
         [DllImport("kernel32.dll")]
         static extern bool VirtualProtectEx(IntPtr hProcess, IntPtr lpAddress, int dwSize, uint flNewProtect, out uint lpflOldProtect);
+        [DllImport("kernel32.dll")]
+        static extern uint GetLastError();
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern int VirtualQueryEx(IntPtr hProcess,IntPtr lpAddress, out MEMORY_BASIC_INFORMATION lpBuffer, uint dwLength);
+        public struct MEMORY_BASIC_INFORMATION
+        {
+            public int BaseAddress;
+            public int AllocationBase;
+            public int AllocationProtect;
+            public int RegionSize;
+            public int State;
+            public int Protect;
+            public int lType;
+        }
         private void comboBox1_KeyDown(object sender, KeyEventArgs e)
         {
             if ((comboBox1.SelectedItem as cbModule).name != "odmowa dostępu" && e.KeyCode == Keys.Right)
@@ -245,8 +254,15 @@ namespace gra
                     byte[] contents = new byte[(comboBox1.SelectedItem as cbModule).mSize];
                     uint lpflOldProtect;
                     vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, (comboBox1.SelectedItem as cbModule).mSize, 0x40, out lpflOldProtect);
+                    if (vp==false)
+                    {
+                        MEMORY_BASIC_INFORMATION mem_basic_info = new MEMORY_BASIC_INFORMATION();
+                        VirtualQueryEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, out mem_basic_info, 28);
+                        contents = new byte[mem_basic_info.RegionSize];
+                        vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, mem_basic_info.RegionSize, 0x40, out lpflOldProtect);
+                    }
                     IntPtr lpNumberOfBytesRead;
-                    rpm = ReadProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents, (comboBox1.SelectedItem as cbModule).mSize, out lpNumberOfBytesRead);
+                    rpm = ReadProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents, contents.Length, out lpNumberOfBytesRead);
                     CloseHandle(pHandle);
                     fs.Write(contents, 0, contents.Length);
                 }
@@ -261,15 +277,12 @@ namespace gra
             {
                 byte[] contents=File.ReadAllBytes(common.gamePath + DateTime.Today.ToString("yyyyMMdd") + "\\" + (comboBox2.SelectedItem as cbProcess).name + "\\" + (comboBox1.SelectedItem as cbModule).name);
                 bool vp=false, rpm=false;
-                if (contents.Length== (comboBox1.SelectedItem as cbModule).mSize)
-                {
-                    IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
-                    uint lpflOldProtect;
-                    vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, (comboBox1.SelectedItem as cbModule).mSize, 0x40, out lpflOldProtect);
-                    IntPtr lpNumberOfBytesWrite;
-                    rpm = WriteProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents, (comboBox1.SelectedItem as cbModule).mSize, out lpNumberOfBytesWrite);
-                    CloseHandle(pHandle);
-                }
+                IntPtr pHandle = OpenProcess(0x1F0FFF, true, (comboBox2.SelectedItem as cbProcess).id);
+                uint lpflOldProtect;
+                vp = VirtualProtectEx(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents.Length, 0x40, out lpflOldProtect);
+                IntPtr lpNumberOfBytesWrite;
+                rpm = WriteProcessMemory(pHandle, (comboBox1.SelectedItem as cbModule).basee, contents,contents.Length, out lpNumberOfBytesWrite);
+                CloseHandle(pHandle);
                 if (vp == false || rpm == false)
                 {
                     comboBox1.Font = new Font(comboBox1.Font, FontStyle.Strikeout);
@@ -308,6 +321,5 @@ namespace gra
             dataGridView2.DataSource = tableImports;
         }
     }
-
 }
 
