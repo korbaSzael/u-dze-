@@ -32,13 +32,14 @@
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.button1 = new System.Windows.Forms.Button();
+            this.driveListBox1 = new Microsoft.VisualBasic.Compatibility.VB6.DriveListBox();
+            this.dirListBox1 = new Microsoft.VisualBasic.Compatibility.VB6.DirListBox();
+            this.fileListBox1 = new Microsoft.VisualBasic.Compatibility.VB6.FileListBox();
             this.SuspendLayout();
             // 
             // treeView1
@@ -70,15 +71,6 @@
             this.textBox2.Size = new System.Drawing.Size(204, 20);
             this.textBox2.TabIndex = 2;
             this.textBox2.TabStop = false;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(602, 37);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(184, 20);
-            this.textBox3.TabIndex = 3;
-            this.textBox3.Text = "windowShot.bmp";
-            this.textBox3.Click += new System.EventHandler(this.textBox3_Click);
             // 
             // label1
             // 
@@ -118,27 +110,47 @@
             this.textBox5.TabStop = false;
             this.textBox5.Text = "uchwyt okna";
             // 
-            // button1
+            // driveListBox1
             // 
-            this.button1.Location = new System.Drawing.Point(602, 74);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(182, 27);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "zmień folder zapisu";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.driveListBox1.FormattingEnabled = true;
+            this.driveListBox1.Location = new System.Drawing.Point(589, 37);
+            this.driveListBox1.Name = "driveListBox1";
+            this.driveListBox1.Size = new System.Drawing.Size(204, 21);
+            this.driveListBox1.TabIndex = 8;
+            this.driveListBox1.SelectedValueChanged += new System.EventHandler(this.driveListBox1_SelectedValueChanged);
+            // 
+            // dirListBox1
+            // 
+            this.dirListBox1.FormattingEnabled = true;
+            this.dirListBox1.IntegralHeight = false;
+            this.dirListBox1.Location = new System.Drawing.Point(589, 64);
+            this.dirListBox1.Name = "dirListBox1";
+            this.dirListBox1.Size = new System.Drawing.Size(204, 181);
+            this.dirListBox1.TabIndex = 9;
+            this.dirListBox1.Change += new System.EventHandler(this.dirListBox1_SelectedValueChanged);
+            this.dirListBox1.SelectedIndexChanged += new System.EventHandler(this.dirListBox1_SelectedIndexChanged);
+            // 
+            // fileListBox1
+            // 
+            this.fileListBox1.FormattingEnabled = true;
+            this.fileListBox1.Location = new System.Drawing.Point(589, 251);
+            this.fileListBox1.Name = "fileListBox1";
+            this.fileListBox1.Pattern = "*.bmp";
+            this.fileListBox1.Size = new System.Drawing.Size(204, 134);
+            this.fileListBox1.TabIndex = 10;
             // 
             // zrzuty
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.fileListBox1);
+            this.Controls.Add(this.dirListBox1);
+            this.Controls.Add(this.driveListBox1);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.treeView1);
@@ -156,12 +168,13 @@
         private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button button1;
+        private Microsoft.VisualBasic.Compatibility.VB6.DriveListBox driveListBox1;
+        private Microsoft.VisualBasic.Compatibility.VB6.DirListBox dirListBox1;
+        private Microsoft.VisualBasic.Compatibility.VB6.FileListBox fileListBox1;
     }
 }

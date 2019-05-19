@@ -70,6 +70,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.taskBarIconMenu = new System.Windows.Forms.ContextMenu();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
@@ -472,11 +477,10 @@
             // 
             // notifyIcon1
             // 
-            this.notifyIcon1.BalloonTipText = "wciśnij raz aby zakończyć";
+            this.notifyIcon1.BalloonTipText = "prawym myczy dla przybornika";
             this.notifyIcon1.BalloonTipTitle = "gra zręcznościowa żabka";
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Visible = true;
-            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
             // 
             // toolTip1
             // 
@@ -489,10 +493,42 @@
             this.toolTip1.UseAnimation = false;
             this.toolTip1.UseFading = false;
             // 
+            // taskBarIconMenu
+            // 
+            this.taskBarIconMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem2,
+            this.menuItem3,
+            this.menuItem4});
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.Text = "Kalendarz";
+            this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 1;
+            this.menuItem2.Text = "Wyliczenia";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 2;
+            this.menuItem3.Text = "Collegatio";
+            this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 3;
+            this.menuItem4.Text = "inne";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
             // timer1
             // 
             this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // Form1
             // 
@@ -515,7 +551,6 @@
             this.Text = "Gra zręcznościowa żabka";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
-            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIconMenuItem1_Click);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -569,8 +604,13 @@
         private System.Windows.Forms.ToolStripMenuItem introToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wyślijMailemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem innyGraczToolStripMenuItem;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button bFOOD;
+        private System.Windows.Forms.ContextMenu taskBarIconMenu;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.MenuItem menuItem4;
     }
 }
 

@@ -32,11 +32,11 @@ namespace gra
             
             return ltn;
         }
-        string choosenFolder = common.gamePath.Remove(common.gamePath.ToString().LastIndexOf("\\"), 1);
         private void zrzuty_Load(object sender, EventArgs e)
         {
             treeView1.Nodes.Clear();
             treeView1.Nodes.AddRange(getTreeNodes(dll.dll.allWindows()).ToArray());
+            dirListBox1.Path = common.gamePath.Remove(common.gamePath.ToString().LastIndexOf("\\"), 1);
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -47,24 +47,33 @@ namespace gra
 
         private void treeView1_DoubleClick(object sender, EventArgs e)
         {
-            common.WNDtoBMP((treeView1.SelectedNode.Tag as window).handle, choosenFolder +"\\"+ textBox3.Text);
-            Process.Start(choosenFolder+"\\" + textBox3.Text);
+            string where="";
+            if (fileListBox1.SelectedIndex == -1) where = dirListBox1.Path + "\\windowShot.bmp";
+            if (fileListBox1.SelectedIndex != -1) where = dirListBox1.Path + "\\"+fileListBox1.SelectedItem;
+            common.WNDtoBMP((treeView1.SelectedNode.Tag as window).handle,where);
+            fileListBox1.Refresh();
+            Process.Start(where);
         }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void driveListBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            folderBrowserDialog1.Description="Wybierz folder w jaki będziesz zapisywać zrzuty...";
-            folderBrowserDialog1.SelectedPath = choosenFolder;
-            DialogResult result = folderBrowserDialog1.ShowDialog();
-            if (result == DialogResult.OK)
+            string oldDir = dirListBox1.Path;
+            try
             {
-                choosenFolder=folderBrowserDialog1.SelectedPath;
+                dirListBox1.Path = driveListBox1.Drive;
+            }catch(Exception ex)
+            {
+                dirListBox1.Path = oldDir;
             }
         }
-        private void textBox3_Click(object sender, EventArgs e)
+
+        private void dirListBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            textBox3.SelectionStart = 0;
-            textBox3.SelectionLength = textBox3.Text.Length-4;
+            fileListBox1.Path = dirListBox1.Path;
+        }
+
+        private void dirListBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

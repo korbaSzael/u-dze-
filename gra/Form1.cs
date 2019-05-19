@@ -173,7 +173,7 @@ namespace gra{
 
         private void zakonczToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Environment.Exit(0);
+            Close();
         }
 
         private void wstzrymajToolStripMenuItem_Click(object sender, EventArgs e)
@@ -311,22 +311,12 @@ namespace gra{
             toolStripStatusLabel1.Text = "Tym przyciskiem zmienisz tło planszy...";
             toolTip1.SetToolTip(button4, "Zmienisz tło z obecnego");
         }
-        private void notifyIconMenuItem1_Click(object sender, EventArgs e)
-        {
-            System.Environment.Exit(0);
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
+            if (common.loggedUser != "") changeToLogout();
             ContextMenu contextMenu1 = new ContextMenu();
-            notifyIcon1.ContextMenu = contextMenu1;
-            MenuItem menuItem1 = new MenuItem();
-            menuItem1.Text = "W&yjdź";
-            menuItem1.Click += new System.EventHandler(notifyIconMenuItem1_Click);
-            contextMenu1.MenuItems.AddRange(new MenuItem[] { menuItem1 });
+            notifyIcon1.ContextMenu = taskBarIconMenu;
             notifyIcon1.ShowBalloonTip(1000);
-            if (common.loggedUser != "")changeToLogout();
-            //wstzrymajToolStripMenuItem_Click(null,null);
-            //innyGraczToolStripMenuItem_Click(null,null);
         }
 
         private void bibliotekiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -654,9 +644,62 @@ namespace gra{
             Text = "Gra zręcznościowa żabka";
             common.loggedUser = "";
         }
-}
+        private void menuItem3_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
 
-public class common
+        private void menuItem1_Click(object sender, EventArgs e)
+        {
+            kalendarz kalendarzOkno = new kalendarz();
+            kalendarzOkno.Show();
+        }
+
+        private void menuItem2_Click(object sender, EventArgs e)
+        {
+        }
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            toolStripProgressBar1.Value = gameView.Width * 10 - leafs[1].X;
+            if (isFrogEating())
+            {
+                eaten++;
+                bFOOD.Text = eaten.ToString();
+            };
+            if (frogJump > 0)
+            {
+                frogLocation.Y -= 9;
+                frogJump -= 10;
+            }
+            else
+            {
+                if (!isFrogOnLeaf()) frogLocation.Y += 13;
+            }
+            for (int i = 0; i < leafs.Length; i++) leafs[i].X -= 14;
+            for (int i = 0; i < foods.Length; i++) foods[i].X -= 14;
+            for (int i = 0; i < birds.Length; i++) birds[i].X -= 14;
+            if (isBirdEatingFrog() || frogLocation.Y > gameView.Height)
+            {
+                gameOver = true;
+                wstzrymajToolStripMenuItem_Click(null, null);
+                if (common.loggedUser != "")
+                {
+                    gameResult gr = new gameResult() { name = common.loggedUser, points = eaten };
+                    common.database.gameResult.InsertOnSubmit(gr);
+                    common.database.SubmitChanges();
+                }
+            }
+            DrawAllObjects();
+        }
+
+        private void menuItem4_Click(object sender, EventArgs e)
+        {
+            ileGraczNaklikau ileOkno = new ileGraczNaklikau();
+            ileOkno.Show();
+        }
+    }
+
+    public class common
     {
         public static string gamePath = "";
         public static string[] pathsToFiles(string rootPath, string fileName)

@@ -288,3 +288,5 @@ C:\podzespo-y-arduino\gra\obj\Debug\gra.csproj.CoreCompileInputs.cache
 C:\podzespo-y-arduino\gra\obj\Debug\gra.csproj.CopyComplete
 C:\podzespo-y-arduino\gra\obj\Debug\gra.exe
 C:\podzespo-y-arduino\gra\obj\Debug\gra.pdb
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.kalendarz.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.ileGraczNaklikau.resources
