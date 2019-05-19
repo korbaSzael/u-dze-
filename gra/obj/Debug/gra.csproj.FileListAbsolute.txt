@@ -290,3 +290,4 @@ C:\podzespo-y-arduino\gra\obj\Debug\gra.exe
 C:\podzespo-y-arduino\gra\obj\Debug\gra.pdb
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.kalendarz.resources
 C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\obj\Debug\gra.ileGraczNaklikau.resources
+C:\Users\Piotr\Desktop\podzespo-y-arduino\gra\bin\Debug\Ionic.Zip.dll
