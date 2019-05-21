@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Piotr\\Desktop\\dll\\dll\\dll.csproj",
+      "projectUniqueName": "C:\\Users\\Piotr\\Desktop\\podzespo-y-arduino\\dll\\dll\\dll.csproj",
       "projectName": "dll",
-      "projectPath": "C:\\Users\\Piotr\\Desktop\\dll\\dll\\dll.csproj",
+      "projectPath": "C:\\Users\\Piotr\\Desktop\\podzespo-y-arduino\\dll\\dll\\dll.csproj",
       "packagesPath": "C:\\Users\\Piotr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Piotr\\Desktop\\dll\\dll\\obj\\",
+      "outputPath": "C:\\Users\\Piotr\\Desktop\\podzespo-y-arduino\\dll\\dll\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Web;
-using System.Net.Mail;
-using System.Net;
 using Ionic.Zip;
 using System.IO;
+using EASendMail;
+using System.Collections.Generic;
 
 namespace gra
 {
     public partial class SendMail : Form
     {
-        string email = "";
-        string passw = "";
         public SendMail()
         {
             InitializeComponent();
@@ -31,16 +21,31 @@ namespace gra
 
         private void button1_Click(object sender, EventArgs e)
         {
-            email = tbFROM.Text;
-            passw = tbPASSWORD.Text;
-            //MailMessage mail = new MailMessage(tbFROM.Text,tbTO.Text,tbSUBJECT.Text,rtbBODY.Text);
-            MailMessage mail = new MailMessage(email,email,email,email);
-            SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-            smtpClient.Port = 587;
-            //smtpClient.Credentials = new NetworkCredential(tbUSERNAME.Text,tbPASSWORD.Text);
-            smtpClient.Credentials = new NetworkCredential(email,passw);
-            smtpClient.EnableSsl = true;
-            smtpClient.Send(mail);
+            SmtpMail thisMail = new SmtpMail("TryIt");
+            EASendMail.SmtpClient thisServer = new EASendMail.SmtpClient();
+            foreach (string attachment in attachments)
+            {
+                thisMail.AddAttachment(attachment);
+            }
+            thisMail.From = tbFROM.Text;
+            thisMail.To = tbTO.Text;
+            thisMail.Subject = tbSUBJECT.Text;
+            thisMail.TextBody = tbMESSAGE.Text;
+            SmtpServer orThisServer = new SmtpServer("smtp.gmail.com");
+            orThisServer.Port = 465;
+            orThisServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+            orThisServer.User = tbFROM.Text;
+            orThisServer.Password = tbPASSWORD.Text;
+            try
+            {
+                thisServer.SendMail(orThisServer, thisMail);
+                btnSEND.Text = "DONE";
+            }
+            catch (Exception ex)
+            {
+                tbMESSAGE.Text = ex.Message;
+                btnSEND.Text = "FAILED";
+            }
         }
 
         private void textBox7_TextChanged(object sender, EventArgs e)
@@ -50,43 +55,10 @@ namespace gra
 
         private void button2_Click(object sender, EventArgs e)
         {
-            email = tbFROM.Text;
-            passw = tbPASSWORD.Text;
-            var client = new SmtpClient("smtp.gmail.com", 587)
-            {
-                Credentials = new NetworkCredential(email, passw),
-                EnableSsl = true
-            };
-            client.Send(email,email, "test", "testbody");
         }
            
-private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            email = tbFROM.Text;
-            passw = tbPASSWORD.Text;
-            string smtpAddress = "smtp.gmail.com";
-            int portNumber = 587;
-            bool enableSSL = true;
-            string emailFromAddress = email; //Sender Email Address  
-            string password = passw; //Sender Password  
-            string emailToAddress = email; //Receiver Email Address  
-            string subject = "Hello";
-            string body = "Hello, This is Email sending test using gmail.";
-            using (MailMessage mail = new MailMessage())
-            {
-                mail.From = new MailAddress(emailFromAddress);
-                mail.To.Add(emailToAddress);
-                mail.Subject = subject;
-                mail.Body = body;
-                mail.IsBodyHtml = true;
-                //mail.Attachments.Add(new Attachment("D:\\TestFile.txt"));//--Uncomment this to send any attachment  
-                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
-                {
-                    smtp.Credentials = new NetworkCredential(emailFromAddress, password);
-                    smtp.EnableSsl = enableSSL;
-                    smtp.Send(mail);
-                }
-            }
         }
         private void textBox1_DragOver(object sender, DragEventArgs e)
         {
@@ -96,7 +68,7 @@ private void button3_Click(object sender, EventArgs e)
                 e.Effect = DragDropEffects.None;
             Focus();
         }
-
+        List<string> attachments = new List<string>();
         private void textBox1_DragDrop(object sender, DragEventArgs e)
         {
             string[] filenames = (string[])e.Data.GetData(DataFormats.FileDrop, false);
@@ -108,7 +80,9 @@ private void button3_Click(object sender, EventArgs e)
                 {
                     zip.AddFile(Path.GetFileName(filename));
                 }
-                zip.Save(Path.GetDirectoryName(filenames[0]) + "\\" + Path.GetFileNameWithoutExtension(filenames[0]) + ".zip");
+                string filePath = Path.GetDirectoryName(filenames[0]) + "\\" + Path.GetFileNameWithoutExtension(filenames[0]) + ".zip";
+                zip.Save(filePath);
+                attachments.Add(filePath);
             }
             Directory.SetCurrentDirectory(Path.GetPathRoot(lastDirectory));
         }

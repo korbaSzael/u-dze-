@@ -52,6 +52,9 @@
     <Reference Include="dll">
       <HintPath>..\dll.dll</HintPath>
     </Reference>
+    <Reference Include="EASendMail">
+      <HintPath>..\EASendMail.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -108,12 +111,6 @@
     <Compile Include="GameNote.Designer.cs">
       <DependentUpon>GameNote.cs</DependentUpon>
     </Compile>
-    <Compile Include="ileGraczNaklikau.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ileGraczNaklikau.Designer.cs">
-      <DependentUpon>ileGraczNaklikau.cs</DependentUpon>
-    </Compile>
     <Compile Include="Intro.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +157,12 @@
     <Compile Include="zarzadca.Designer.cs">
       <DependentUpon>zarzadca.cs</DependentUpon>
     </Compile>
+    <Compile Include="zmeczenieGracza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="zmeczenieGracza.Designer.cs">
+      <DependentUpon>zmeczenieGracza.cs</DependentUpon>
+    </Compile>
     <Compile Include="zrzuty.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,9 +180,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GameNote.resx">
       <DependentUpon>GameNote.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ileGraczNaklikau.resx">
-      <DependentUpon>ileGraczNaklikau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Intro.resx">
       <DependentUpon>Intro.cs</DependentUpon>
@@ -210,6 +210,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="zarzadca.resx">
       <DependentUpon>zarzadca.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="zmeczenieGracza.resx">
+      <DependentUpon>zmeczenieGracza.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="zrzuty.resx">
       <DependentUpon>zrzuty.cs</DependentUpon>

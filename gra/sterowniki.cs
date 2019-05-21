@@ -154,27 +154,38 @@ namespace gra
             public ushort MaximumLength;
             public IntPtr Buffer;
         }
+        [DllImport("NtDll.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern void RtlInitUnicodeString(ref UNICODE_STRING DestinationString, [MarshalAs(UnmanagedType.LPWStr)] string SourceString);
         [DllImport("ntdll.dll")]
-        public static extern void RtlInitUnicodeString(out UNICODE_STRING DestinationString,[MarshalAs(UnmanagedType.LPWStr)] string SourceString);
+        public static extern uint ZwLoadDriver(ref UNICODE_STRING DestinationString);
         [DllImport("ntdll.dll")]
-        //public static extern int ZwLoadDriver(UNICODE_STRING DestinationString);
-        public static extern int ZwLoadDriver(IntPtr ff);
+        public static extern uint ZwUnloadDriver(ref UNICODE_STRING DestinationString);
+        [DllImport("NtDll.dll", SetLastError = true, CharSet = CharSet.Unicode)]
+        public static extern int RtlNtStatusToDosError(int Status);
         private void dataGridView2_DoubleClick(object sender, EventArgs e)
         {
-            UNICODE_STRING unicodeString;
-            RtlInitUnicodeString(out unicodeString, "Registry\\Machine\\System\\CurrentControlSet\\Services\\" + (string)dataGridView2.SelectedRows[0].Cells["BaseName"].Value);
-            byte[] bytes = new byte[unicodeString.Length];
-            Marshal.Copy(unicodeString.Buffer,bytes, 0, bytes.Length);
-            textBox1.Text = "";
-            foreach (byte bt in bytes)
-            {
-                textBox1.Text += bt.ToString("X2");
-            }
+            UNICODE_STRING unicodeString = new UNICODE_STRING();
+            RtlInitUnicodeString(ref unicodeString, "\\Registry\\Machine\\System\\CurrentControlSet\\Services\\" + (string)dataGridView2.SelectedRows[0].Cells["BaseName"].Value);
             privilege driverPrivilege = new privilege("SeLoadDriverPrivilege");
-            //int wynik = ZwLoadDriver(0);
-            int wynik=ZwLoadDriver(IntPtr.Zero);
-            textBox2.Text = wynik.ToString("X8");
-            //  EnableDisablePrivilege("SeLoadDriverPrivilege", true);
+            uint wynik=ZwLoadDriver(ref unicodeString);
+            if (wynik == 0)
+            {
+                getRunningDrivers();
+                return;
+            }
+            wynik = ZwUnloadDriver(ref unicodeString);
+            if (wynik == 0)
+            {
+                getRunningDrivers();
+                return;
+            }
+            if (wynik == 0xC0000061)
+            {
+                MessageBox.Show("Zostań administratorem");
+            }
+            else {
+                MessageBox.Show(wynik.ToString("X8"));
+            }
         }
     }
 }

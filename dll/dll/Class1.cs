@@ -22,6 +22,7 @@ namespace dll
         public String name;
         public String className;
         public List<window> childWindows = null;
+        void sth() { }
     }
     public static class dll
     {

@@ -7,3 +7,12 @@ C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard2.0\dll.AssemblyInfoInputs.c
 C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard2.0\dll.AssemblyInfo.cs
 C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard2.0\dll.dll
 C:\Users\Piotr\Desktop\dll\dll\obj\Debug\netstandard2.0\dll.pdb
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\bin\Debug\netstandard2.0\dll.deps.json
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\bin\Debug\netstandard2.0\dll.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\bin\Debug\netstandard2.0\dll.pdb
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.csprojAssemblyReference.cache
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.csproj.CoreCompileInputs.cache
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.AssemblyInfoInputs.cache
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.AssemblyInfo.cs
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.dll
+C:\Users\Piotr\Desktop\podzespo-y-arduino\dll\dll\obj\Debug\netstandard2.0\dll.pdb

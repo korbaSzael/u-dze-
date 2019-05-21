@@ -61,13 +61,94 @@ namespace gra
             if (doThis != null && what >= 0 && (wParam == down || wParam == sysDown)) doThis((Keys)code);
             if (orThis != null && what >= 0 && (wParam == down || wParam == sysDown))
             {
-                const int KEY_PRESSED = 0x8000;
-                bool isUpper = false;
-                if (Convert.ToBoolean(GetKeyState(0x14) & KEY_PRESSED)) isUpper = true;//caps
-                if (Convert.ToBoolean(GetKeyState(0xA0) & KEY_PRESSED)|| Convert.ToBoolean(GetKeyState(0xA1) & KEY_PRESSED)) isUpper = !isUpper;//shift
-                if (isUpper&&((code >= 48 && code <= 57)|| (code >= 65 && code <= 90)))
+                bool isUpper = (Convert.ToBoolean(GetKeyState(0x14) & 0xffff)); //caps
+                bool shift = (Convert.ToBoolean(GetKeyState(0xA0) & 0x8000) || Convert.ToBoolean(GetKeyState(0xA1) & 0x8000));
+                if (shift) isUpper = !isUpper;
+                bool ctrl = Convert.ToBoolean(GetKeyState(0x11) & 0x8000);
+                if (ctrl&& ((code >= 48 && code <= 57)|| (code >= 65 && code <= 90)))
                 {
-                    co += "(?" + code.ToString() + ")";
+                    co += "(CTRL)";
+                }
+                bool rightAlt = Convert.ToBoolean(GetKeyState(0xA5) & 0x8000);
+                if (rightAlt && (code >= 65 && code <= 90))
+                {
+                    co += "(ALT)";
+                }
+                if (shift&& ((code >= 48 && code <= 57)|| code == 192 || code == 189 || code == 107 || code == 219 || code == 221 || code == 186 || code == 188 || code == 110 || code == 190 || code == 191 || code == 220 || code == 226))
+                {
+                    switch (code)
+                    {
+                        case 48:
+                            co += ")";
+                            break;
+                        case 49:
+                            co += "!";
+                            break;
+                        case 50:
+                            co += "@";
+                            break;
+                        case 51:
+                            co += "#";
+                            break;
+                        case 52:
+                            co += "$";
+                            break;
+                        case 53:
+                            co += "%";
+                            break;
+                        case 54:
+                            co += "^";
+                            break;
+                        case 55:
+                            co += "&";
+                            break;
+                        case 56:
+                            co += "*";
+                            break;
+                        case 57:
+                            co += "(";
+                            break;
+                        case 192:
+                            co += "~";
+                            break;
+                        case 189:
+                            co += "_";
+                            break;
+                        case 219:
+                            co += "{";
+                            break;
+                        case 221:
+                            co += "}";
+                            break;
+                        case 186:
+                            co += ":";
+                            break;
+                        case 188:
+                            co += "\"";
+                            break;
+                        case 110:
+                            co += "<";
+                            break;
+                        case 190:
+                            co += ">";
+                            break;
+                        case 191:
+                            co += "?";
+                            break;
+                        case 107:
+                            co += "+";
+                            break;
+                        case 220:
+                            co += "|";
+                            break;
+                        case 226:
+                            co += "|";
+                            break;
+                    }
+                }
+                else if (isUpper && (code >= 65 && code <= 90))
+                {
+                    co += (char)code;
                 }
                 else if (code >= 48 && code <= 57)//0-9
                 {
@@ -87,7 +168,7 @@ namespace gra
                     switch (code)
                     {
                         case 165:
-                            co += "(RALT)";
+                            co += "";//(RALT)
                             break;
                         case 92:
                             co += "(RWIN)";
@@ -96,16 +177,16 @@ namespace gra
                             co += "(CNTXT)";
                             break;
                         case 163:
-                            co += "(RCTRL)";
+                            co += "";// (RCTRL)
                             break;
                         case 161:
-                            co += "(RSHFT)";
+                            co += "";//(RSHFT)
                             break;
                         case 3:
                             co += "(CANCEL)";
                             break;
                         case 12:
-                            co += "(LCNTR)";
+                            co += "";//(LCNTR)
                             break;
                         case 144:
                             co += "(NMLCK)";
@@ -117,16 +198,16 @@ namespace gra
                             co += "(CAPS)";
                             break;
                         case 160:
-                            co += "(LSHFT)";
+                            co += "";//(LSHFT)
                             break;
                         case 162:
-                            co += "(LCTRL)";
+                            co += "";//(LCTRL)
                             break;
                         case 91:
                             co += "(LWIN)";
                             break;
                         case 164:
-                            co += "(LALT)";
+                            co += "";// (LALT)
                             break;
                         case 38:
                             co += "(UP)";

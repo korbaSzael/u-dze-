@@ -45,7 +45,6 @@
             this.introToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wyślijMailemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pomocToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wyświetlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.oGrzeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bibliotekiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zrzutyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,10 +70,10 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.taskBarIconMenu = new System.Windows.Forms.ContextMenu();
-            this.menuItem1 = new System.Windows.Forms.MenuItem();
-            this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
@@ -195,7 +194,7 @@
             // introToolStripMenuItem
             // 
             this.introToolStripMenuItem.Name = "introToolStripMenuItem";
-            this.introToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.introToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.introToolStripMenuItem.Text = "Intro";
             this.introToolStripMenuItem.Click += new System.EventHandler(this.introToolStripMenuItem_Click);
             this.introToolStripMenuItem.MouseHover += new System.EventHandler(this.introToolStripMenuItem_MouseHover);
@@ -203,14 +202,13 @@
             // wyślijMailemToolStripMenuItem
             // 
             this.wyślijMailemToolStripMenuItem.Name = "wyślijMailemToolStripMenuItem";
-            this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.wyślijMailemToolStripMenuItem.Text = "Wyślij mailem";
             this.wyślijMailemToolStripMenuItem.Click += new System.EventHandler(this.wyślijMailemToolStripMenuItem_Click);
             // 
             // pomocToolStripMenuItem
             // 
             this.pomocToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wyświetlToolStripMenuItem,
             this.oGrzeToolStripMenuItem,
             this.bibliotekiToolStripMenuItem,
             this.zrzutyToolStripMenuItem,
@@ -220,19 +218,10 @@
             this.pomocToolStripMenuItem.Text = "Pomoc";
             this.pomocToolStripMenuItem.MouseHover += new System.EventHandler(this.pomocToolStripMenuItem_MouseHover);
             // 
-            // wyświetlToolStripMenuItem
-            // 
-            this.wyświetlToolStripMenuItem.Enabled = false;
-            this.wyświetlToolStripMenuItem.Name = "wyświetlToolStripMenuItem";
-            this.wyświetlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.wyświetlToolStripMenuItem.Text = "Wyświetl";
-            this.wyświetlToolStripMenuItem.Click += new System.EventHandler(this.wyświetlToolStripMenuItem_Click);
-            this.wyświetlToolStripMenuItem.MouseEnter += new System.EventHandler(this.wyświetlToolStripMenuItem_MouseEnter);
-            // 
             // oGrzeToolStripMenuItem
             // 
             this.oGrzeToolStripMenuItem.Name = "oGrzeToolStripMenuItem";
-            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.oGrzeToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.oGrzeToolStripMenuItem.Text = "O grze";
             this.oGrzeToolStripMenuItem.Click += new System.EventHandler(this.oGrzeToolStripMenuItem_Click);
             this.oGrzeToolStripMenuItem.MouseEnter += new System.EventHandler(this.oGrzeToolStripMenuItem_MouseEnter);
@@ -240,7 +229,7 @@
             // bibliotekiToolStripMenuItem
             // 
             this.bibliotekiToolStripMenuItem.Name = "bibliotekiToolStripMenuItem";
-            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.bibliotekiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.bibliotekiToolStripMenuItem.Text = "Biblioteki";
             this.bibliotekiToolStripMenuItem.Click += new System.EventHandler(this.bibliotekiToolStripMenuItem_Click);
             this.bibliotekiToolStripMenuItem.MouseEnter += new System.EventHandler(this.bibliotekiToolStripMenuItem_MouseEnter);
@@ -248,7 +237,7 @@
             // zrzutyToolStripMenuItem
             // 
             this.zrzutyToolStripMenuItem.Name = "zrzutyToolStripMenuItem";
-            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.zrzutyToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.zrzutyToolStripMenuItem.Text = "Zrzuty";
             this.zrzutyToolStripMenuItem.Click += new System.EventHandler(this.zrzutyToolStripMenuItem_Click);
             this.zrzutyToolStripMenuItem.MouseHover += new System.EventHandler(this.zrzutyToolStripMenuItem_MouseHover);
@@ -256,7 +245,7 @@
             // sterownikiToolStripMenuItem
             // 
             this.sterownikiToolStripMenuItem.Name = "sterownikiToolStripMenuItem";
-            this.sterownikiToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sterownikiToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sterownikiToolStripMenuItem.Text = "Sterowniki";
             this.sterownikiToolStripMenuItem.Click += new System.EventHandler(this.sterownikiToolStripMenuItem_Click);
             this.sterownikiToolStripMenuItem.MouseHover += new System.EventHandler(this.sterownikiToolStripMenuItem_MouseHover);
@@ -495,34 +484,34 @@
             // taskBarIconMenu
             // 
             this.taskBarIconMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1,
-            this.menuItem2,
             this.menuItem3,
-            this.menuItem4});
-            // 
-            // menuItem1
-            // 
-            this.menuItem1.Index = 0;
-            this.menuItem1.Text = "Kalendarz";
-            this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
-            // 
-            // menuItem2
-            // 
-            this.menuItem2.Index = 1;
-            this.menuItem2.Text = "Wyliczenia";
-            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
+            this.menuItem1,
+            this.menuItem4,
+            this.menuItem2});
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 2;
+            this.menuItem3.Index = 0;
             this.menuItem3.Text = "Collegatio";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 1;
+            this.menuItem1.Text = "Kalendarz";
+            this.menuItem1.Click += new System.EventHandler(this.menuItem1_Click);
+            // 
             // menuItem4
             // 
-            this.menuItem4.Index = 3;
-            this.menuItem4.Text = "inne";
+            this.menuItem4.Index = 2;
+            this.menuItem4.Text = "Zmeczenie gracza";
             this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 3;
+            this.menuItem2.Text = "Graj";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click_1);
             // 
             // timer1
             // 
@@ -548,6 +537,7 @@
             this.Name = "Form1";
             helpProvider1.SetShowHelp(this, false);
             this.Text = "Gra zręcznościowa żabka";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.menuStrip1.ResumeLayout(false);
@@ -579,7 +569,6 @@
         private System.Windows.Forms.ToolStripMenuItem przemyśleniaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem barwyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem inneToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wyświetlToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem oGrzeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wstzrymajToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem odtwarzajToolStripMenuItem;
@@ -606,10 +595,10 @@
         private System.Windows.Forms.Button bFOOD;
         private System.Windows.Forms.ContextMenu taskBarIconMenu;
         private System.Windows.Forms.MenuItem menuItem1;
-        private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.MenuItem menuItem3;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.MenuItem menuItem4;
+        private System.Windows.Forms.MenuItem menuItem2;
     }
 }
 

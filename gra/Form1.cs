@@ -16,7 +16,6 @@ using System.Text.RegularExpressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Diagnostics;
-using dll;
 using System.Threading;
 
 namespace gra{
@@ -115,7 +114,7 @@ namespace gra{
         public Form1()
         {
             InitializeComponent();
-            if (common.isAlreadyOpened()) System.Environment.Exit(0);
+            if (common.isAlreadyOpened()) Close();
             common.gamePath = Directory.GetCurrentDirectory().Substring(0, Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\', Directory.GetCurrentDirectory().LastIndexOf('\\') - 1) - 1) + 1);
             frog = new Bitmap(common.gamePath + "żaba1.jpg");
             leaf = new Bitmap(common.gamePath + "liść.jpg");
@@ -157,8 +156,8 @@ namespace gra{
                     i++;
                 }
             }
-            player.URL = common.gamePath + "hudba.mp3";
-            odtwarzajToolStripMenuItem_Click(null,null);
+            //player.URL = common.gamePath + "hudba.mp3";
+            //odtwarzajToolStripMenuItem_Click(null,null);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -262,7 +261,6 @@ namespace gra{
             {
                 menuStrip1.BackColor = colorDialog.Color;
             }
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -456,7 +454,7 @@ namespace gra{
 
         private void minimalizujToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Minimized;
+            Hide();
         }
 
         private void zarządcaZdjęćToolStripMenuItem_Click(object sender, EventArgs e)
@@ -646,6 +644,7 @@ namespace gra{
         }
         private void menuItem3_Click(object sender, EventArgs e)
         {
+            realClosing = true;
             Close();
         }
 
@@ -691,11 +690,28 @@ namespace gra{
             }
             DrawAllObjects();
         }
-
+        zmeczenieGracza zmeczenieOkno=null;
         private void menuItem4_Click(object sender, EventArgs e)
         {
-            ileGraczNaklikau ileOkno = new ileGraczNaklikau();
-            ileOkno.Show();
+            if (zmeczenieOkno != null)
+            {
+                zmeczenieOkno.Show();
+                return;
+            }
+            zmeczenieOkno = new zmeczenieGracza();
+            zmeczenieOkno.Show();
+        }
+
+        private void menuItem2_Click_1(object sender, EventArgs e)
+        {
+            Show();
+        }
+        bool realClosing = false;
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (realClosing) return;
+            e.Cancel = true;
+            Hide();
         }
     }
 
