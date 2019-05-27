@@ -299,7 +299,7 @@
             this.Controls.Add(this.tabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "zarzadca";
-            this.Text = "zarzadca";
+            this.Text = "zarzadca zdjęć";
             this.Load += new System.EventHandler(this.zarzadca_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);

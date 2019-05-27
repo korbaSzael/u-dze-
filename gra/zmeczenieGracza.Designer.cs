@@ -73,7 +73,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "zmeczenieGracza";
-            this.Text = "zmeczenieGracza";
+            this.Text = "Zmeczenie gracza";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.zmeczenieGracza_FormClosing);
             this.Load += new System.EventHandler(this.zmeczenieGracza_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

@@ -116,7 +116,7 @@
             // nowaToolStripMenuItem
             // 
             this.nowaToolStripMenuItem.Name = "nowaToolStripMenuItem";
-            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.nowaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nowaToolStripMenuItem.Text = "Nowa";
             this.nowaToolStripMenuItem.Click += new System.EventHandler(this.nowaToolStripMenuItem_Click);
             this.nowaToolStripMenuItem.MouseHover += new System.EventHandler(this.nowaToolStripMenuItem_MouseHover);
@@ -124,7 +124,7 @@
             // zakonczToolStripMenuItem
             // 
             this.zakonczToolStripMenuItem.Name = "zakonczToolStripMenuItem";
-            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.zakonczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.zakonczToolStripMenuItem.Text = "Zakończ";
             this.zakonczToolStripMenuItem.Click += new System.EventHandler(this.zakonczToolStripMenuItem_Click);
             this.zakonczToolStripMenuItem.MouseEnter += new System.EventHandler(this.zakonczToolStripMenuItem_MouseEnter);
@@ -132,7 +132,7 @@
             // innyGraczToolStripMenuItem
             // 
             this.innyGraczToolStripMenuItem.Name = "innyGraczToolStripMenuItem";
-            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.innyGraczToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.innyGraczToolStripMenuItem.Text = "Logowanie";
             this.innyGraczToolStripMenuItem.Click += new System.EventHandler(this.innyGraczToolStripMenuItem_Click);
             // 
@@ -205,6 +205,7 @@
             this.wyślijMailemToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.wyślijMailemToolStripMenuItem.Text = "Wyślij mailem";
             this.wyślijMailemToolStripMenuItem.Click += new System.EventHandler(this.wyślijMailemToolStripMenuItem_Click);
+            this.wyślijMailemToolStripMenuItem.MouseEnter += new System.EventHandler(this.wyślijMailemToolStripMenuItem_MouseEnter);
             // 
             // pomocToolStripMenuItem
             // 
@@ -469,6 +470,7 @@
             this.notifyIcon1.BalloonTipTitle = "gra zręcznościowa żabka";
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Visible = true;
+            this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick_1);
             // 
             // toolTip1
             // 
@@ -515,7 +517,7 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 10;
+            this.timer1.Interval = 10000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
             // Form1

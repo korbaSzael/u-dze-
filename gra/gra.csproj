@@ -111,6 +111,7 @@
     <Compile Include="GameNote.Designer.cs">
       <DependentUpon>GameNote.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Intro.cs">
       <SubType>Form</SubType>
     </Compile>

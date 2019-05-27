@@ -106,7 +106,7 @@
             this.Controls.Add(this.textBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GameNote";
-            this.Text = "GameNote";
+            this.Text = "Przemyślenia";
             this.Load += new System.EventHandler(this.GameNote_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);

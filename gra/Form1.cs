@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Imaging;
-using System.ComponentModel;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Net.Sockets;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Diagnostics;
-using System.Threading;
 
-namespace gra{
+namespace gra
+{
     public partial class Form1 : Form
     {
         Bitmap gameView = null;
@@ -110,6 +101,12 @@ namespace gra{
             }
             return false;
         }
+        int ile = 0;
+        void DoBlink(object sender, EventArgs e)
+        {
+            Text = ile.ToString();
+            Refresh();
+        }
         Random rdm = new Random();
         public Form1()
         {
@@ -172,6 +169,7 @@ namespace gra{
 
         private void zakonczToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            realClosing = true;
             Close();
         }
 
@@ -238,10 +236,26 @@ namespace gra{
             Match matchDate = Regex.Match(result, @"\s+id=ctdat(\s+)*(\w|=)*>(?<date>[^<]+)");
             if (matchTime.Success && matchDate.Success)toolStripStatusLabel1.Text = "Dzisiaj mamy godzinę "+ matchTime.Groups["time"].Value+" w dniu "+ matchDate.Groups["date"].Value;
         }
+        public class MyFontDialog : FontDialog
+        {
+            [DllImport("user32.dll")]
+            static extern bool SetWindowText(IntPtr hWnd, string lpString);
+            private string title = "Czcionka paska powiadomień";
+            private bool titleSet = false;
+            protected override IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
+            {
+                if (!titleSet)
+                {
+                    SetWindowText(hWnd, title);
+                    titleSet = true;
+                }
 
+                return base.HookProc(hWnd, msg, wparam, lparam);
+            }
+        }
         private void inneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FontDialog fontDialog = new FontDialog();
+            FontDialog fontDialog = new MyFontDialog();
             fontDialog.ShowColor = true;
             fontDialog.Color= toolStripStatusLabel1.ForeColor;
             fontDialog.Font = toolStripStatusLabel1.Font;
@@ -252,10 +266,26 @@ namespace gra{
                 toolStripStatusLabel1.Text = "Zmiana czcionki tego paska powiadomień przebiegła pomyślnie...";
             }
         }
+        public class MyColorDialog : ColorDialog
+        {
+            [DllImport("user32.dll")]
+            static extern bool SetWindowText(IntPtr hWnd, string lpString);
+            private string title = "Barwy paska wyboru";
+            private bool titleSet = false;
+            protected override IntPtr HookProc(IntPtr hWnd, int msg, IntPtr wparam, IntPtr lparam)
+            {
+                if (!titleSet)
+                {
+                    SetWindowText(hWnd, title);
+                    titleSet = true;
+                }
 
+                return base.HookProc(hWnd, msg, wparam, lparam);
+            }
+        }
         private void barwyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
+            ColorDialog colorDialog = new MyColorDialog();
             colorDialog.Color = menuStrip1.BackColor;
             if (colorDialog.ShowDialog() == DialogResult.OK)
             {
@@ -282,6 +312,7 @@ namespace gra{
         private void nowaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Program.shouldStartAgain = true;
+            realClosing = true;
             wstzrymajToolStripMenuItem_Click(null,null);
             this.Close();
         }
@@ -677,7 +708,7 @@ namespace gra{
             for (int i = 0; i < leafs.Length; i++) leafs[i].X -= 14;
             for (int i = 0; i < foods.Length; i++) foods[i].X -= 14;
             for (int i = 0; i < birds.Length; i++) birds[i].X -= 14;
-            if (isBirdEatingFrog() || frogLocation.Y > gameView.Height)
+            if (isBirdEatingFrog() || frogLocation.Y > gameView.Height || leafs[1].X<0)
             {
                 gameOver = true;
                 wstzrymajToolStripMenuItem_Click(null, null);
@@ -709,9 +740,23 @@ namespace gra{
         bool realClosing = false;
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Hide();
             if (realClosing) return;
             e.Cancel = true;
-            Hide();
+        }
+
+        private void notifyIcon1_MouseClick_1(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                sterowniki sterownikiOkno = new sterowniki();
+                sterownikiOkno.Show();
+            }
+        }
+
+        private void wyślijMailemToolStripMenuItem_MouseEnter(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "Tu wyślesz nam maila lub komu kolwiek...";
         }
     }
 

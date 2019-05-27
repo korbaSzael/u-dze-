@@ -48,7 +48,6 @@
             this.Controls.Add(this.monthCalendar1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "kalendarz";
-            this.Text = "kalendarz";
             this.ResumeLayout(false);
 
         }

@@ -186,7 +186,7 @@
             this.Controls.Add(this.rtbFIND);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "OtherPlayer";
-            this.Text = "OtherPlayer";
+            this.Text = "Logowanie";
             this.Load += new System.EventHandler(this.OtherPlayer_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

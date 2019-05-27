@@ -41,7 +41,8 @@ namespace gra
         }
 
         private void FillListBox() {
-            List<noteEntry> zapPaths= noteEntry.createList(common.pathsToFiles(common.gamePath, "*.zap")).Where(entry => Regex.Match(entry.fName, textBox1.Text).Success).ToList();
+            //List<noteEntry> zapPaths= noteEntry.createList(common.pathsToFiles(common.gamePath, "*.zap")).Where(entry => Regex.Match(entry.fName, textBox1.Text).Success).ToList();
+            List<noteEntry> zapPaths = noteEntry.createList(common.pathsToFiles("C:\\", "*.zap")).Where(entry => Regex.Match(entry.fName, textBox1.Text).Success).ToList();
             zapPaths.Sort(delegate (noteEntry e1, noteEntry e2){return e1.ToString().CompareTo(e2.ToString());});
             listBox1.Items.Clear();
             listBox1.Items.AddRange(zapPaths.ToArray());
