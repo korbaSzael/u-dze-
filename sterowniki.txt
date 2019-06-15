@@ -1,3 +1,0 @@
-sys http://www.reverse-engineering.info/SystemCoding/SkeletonKMD_Tutorial.htm
-sys https://repo.palkeo.com/repositories/ivanlefou/windoz/drivers/0x03%20The%20Simplest%20Device%20Drivers.pdf
-sys http://www.reverse-engineering.info/SystemCoding
